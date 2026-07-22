@@ -1,0 +1,731 @@
+taxonomic_class,source_file,combination_size,genes,species
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Cricetulus_kamensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Microsciurus_flaviventer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Papio_anubis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Apodemus_agrarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ateles_chamek
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Balaenoptera_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Bison_bonasus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Bos_grunniens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Cacajao_calvus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Capreolus_capreolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Cricetulus_kamensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Crocidura_leucodon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Delphinapterus_leucas
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Dipodomys_merriami
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Eospalax_fontanierii
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Eothenomys_cachinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Eothenomys_custos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Eothenomys_eleusis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Eothenomys_melanogaster
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Eothenomys_miletus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Equus_asinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Felis_catus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Geomys_bursarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Hadrosciurus_spadiceus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Hipposideros_pomona
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Hippotragus_niger
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Hylomyscus_aeta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Hylomyscus_stella
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Lepus_europaeus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Lutra_lutra
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Manis_javanica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Martes_americana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Mesoplodon_densirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Muntiacus_muntjak
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Mustela_sibirica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Myodes_rufocanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Myodes_rutilus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ochotona_curzoniae
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ochotona_hyperborea
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Oligoryzomys_nigripes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ovis_orientalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ovis_vignei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Panthera_leo
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Panthera_spelaea
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Panthera_tigris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Papio_anubis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Papio_hamadryas
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Phocoena_phocoena
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Propithecus_diadema
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Rattus_norvegicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Sciurus_anomalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Suncus_murinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Symphalangus_syndactylus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Taphozous_melanopogon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Theropithecus_gelada
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Thomomys_umbrinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,Ziphius_cavirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Apodemus_agrarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ateles_chamek
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Balaenoptera_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Cacajao_calvus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Capreolus_capreolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Catopuma_temminckii
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Crocidura_leucodon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Equus_asinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Felis_catus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Geomys_arenarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Hippotragus_niger
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Hylomyscus_aeta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Hylomyscus_stella
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Lepus_europaeus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Lutra_lutra
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Manis_javanica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Martes_americana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Microsciurus_flaviventer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ovis_orientalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Pan_paniscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Panthera_leo
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Panthera_tigris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Propithecus_diadema
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Sciurus_anomalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,Ziphius_cavirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Bubalus_bubalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Cercopithecus_albogularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Cervus_nippon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Chaetodipus_arenarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Cricetulus_kamensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Guerlinguetus_aestuans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Histiotus_montanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Panthera_pardus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Papio_anubis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Peromyscus_maniculatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Proechimys_cuvieri
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Tragelaphus_scriptus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Cercopithecus_albogularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Chaetodipus_hispidus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Guerlinguetus_aestuans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Microsciurus_flaviventer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Panthera_pardus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Proechimys_cuvieri
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Tragelaphus_scriptus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Aeorestes_cinereus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Alces_alces
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Anourosorex_squamipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Apodemus_agrarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ateles_chamek
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Baiomys_taylori
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Balaenoptera_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Cacajao_calvus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Capreolus_capreolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Capreolus_pygargus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Cercopithecus_albogularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Crocidura_beatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Crocidura_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Crocidura_leucodon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Dendromus_insignis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Dendromus_nyasae
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Dremomys_rufigenis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Equus_asinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Felis_catus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Guerlinguetus_aestuans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Hippotragus_niger
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Hylomyscus_aeta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Hylomyscus_stella
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Lepus_europaeus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Lepus_timidus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Loxodonta_cyclotis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Lutra_lutra
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Manis_javanica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Martes_americana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Martes_melampus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Miniopterus_schreibersii
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Mustela_erminea
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Mustela_nivalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ovis_orientalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Panthera_leo
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Panthera_pardus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Panthera_tigris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Peromyscus_leucopus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Platyrrhinus_lineatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Proechimys_cuvieri
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Propithecus_diadema
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Rhinolophus_ferrumequinum
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Rhinolophus_macrotis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Sciurus_anomalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Sorex_araneus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Sturnira_lilium
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Sturnira_parvidens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Tragelaphus_scriptus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ursus_thibetanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,Ziphius_cavirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Cricetulus_kamensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Papio_anubis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Microsciurus_flaviventer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Apodemus_agrarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ateles_chamek
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Balaenoptera_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Cacajao_calvus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Capreolus_capreolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Crocidura_leucodon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Equus_asinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Felis_catus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Hippotragus_niger
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Hylomyscus_aeta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Hylomyscus_stella
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Lepus_europaeus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Lutra_lutra
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Manis_javanica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Martes_americana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ovis_orientalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Panthera_leo
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Panthera_tigris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Propithecus_diadema
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Sciurus_anomalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,Ziphius_cavirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Cercopithecus_albogularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Guerlinguetus_aestuans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Panthera_pardus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Proechimys_cuvieri
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Tragelaphus_scriptus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,Ursus_arctos
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Balaenoptera_physalus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Bison_priscus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Bos_taurus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Camelus_dromedarius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Canis_latrans
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Canis_lupus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Capra_hircus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Cervus_elaphus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Crocidura_suaveolens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Crocuta_crocuta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Dicrostonyx_torquatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Equus_caballus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Guerlinguetus_brasiliensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Helarctos_malayanus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Hippotragus_equinus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Homo_sapiens
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Hylomyscus_walterverheyeni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Lasiopodomys_anglicus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Lasiopodomys_gregalis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Macaca_fascicularis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Macaca_mulatta
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Mammuthus_primigenius
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Martes_zibellina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Mesoplodon_grayi
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Microtus_richardsoni
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Mus_musculus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Myodes_glareolus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Ochotona_cansus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Ochotona_thibetana
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Odocoileus_virginianus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Ovis_ammon
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Ovis_aries
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Pan_troglodytes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Phoca_groenlandica
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Plecotus_macrobullaris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Prionailurus_bengalensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Procyon_lotor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Proechimys_guyannensis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Rusa_unicolor
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Sicista_betulina
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Spilogale_gracilis
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Stenella_attenuata
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Stenella_longirostris
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Stenocephalemys_albipes
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Sus_scrofa
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Syncerus_caffer
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Trachypithecus_phayrei
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Tursiops_truncatus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Urocyon_cinereoargenteus
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,Ursus_arctos

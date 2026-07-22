@@ -1,0 +1,12 @@
+taxonomic_class,source_file,combination_size,genes,n_common_species,n_union_species,jaccard_index
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,53,130,0.4076923076923077
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,104,799,0.13016270337922403
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,75,163,0.4601226993865031
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,62,800,0.0775
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,57,140,0.40714285714285714
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,100,817,0.12239902080783353
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,52,807,0.0644361833952912
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,51,175,0.2914285714285714
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,71,821,0.08647990255785627
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,55,824,0.06674757281553398
+Mammalia,initial data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,50,828,0.06038647342995169
