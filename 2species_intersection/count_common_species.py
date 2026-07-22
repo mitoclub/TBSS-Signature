@@ -22,8 +22,12 @@ import pandas as pd
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = PROJECT_ROOT / "initial data" / "MutSpecVertebrates12.csv.gz"
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "output" / "species_intersections"
+DEFAULT_INPUT = (
+    PROJECT_ROOT / "1init_data" / "data" / "MutSpecVertebrates12.csv.gz"
+)
+DEFAULT_OUTPUT_DIR = (
+    PROJECT_ROOT / "2species_intersection" / "data"
+)
 REQUIRED_COLUMNS = {"Gene", "Class", "Species", "Mut", "MutSpec"}
 EXPECTED_MUTATIONS = frozenset(
     {

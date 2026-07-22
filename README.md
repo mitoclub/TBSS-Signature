@@ -1,28 +1,51 @@
 # TBSS-Signature
 
-The aim of the project is to find signatures associated with the time mitochondrial DNA remains single-stranded.
+This project studies whether mitochondrial mutation spectra vary with the time
+that mtDNA remains single-stranded. The repository is organised as a sequence
+of self-contained analyses. Each numbered folder contains its own notebook or
+script, generated tables, figures, and a README that documents that stage.
 
-## Reusable matched-spectrum plots
+## Project structure
 
-`scripts/mutation_comparison.py` contains strict plotting helpers for two to
-five genes. Plotting functions expect an input DataFrame that has already been
-restricted to the exact same species for every gene:
-
-```python
-from scripts.mutation_comparison import (
-    orient_substitutions_to_heavy_strand,
-    plot_matched_spectra,
-    select_common_species,
-)
-
-matched, common_species = select_common_species(mammals, ("CO1", "Cytb"))
-matched = orient_substitutions_to_heavy_strand(matched)
-result = plot_matched_spectra(matched, genes=("CO1", "Cytb"))
+```text
+1init_data/
+|-- data/                         source datasets
+|-- Check192spec.ipynb            input quality-control notebook
+`-- README.md
+2species_intersection/
+|-- data/                         intersection tables
+|-- figures/                      intersection plots
+|-- count_common_species.py       reusable intersection code
+|-- CommonSpeciesStatistics.ipynb
+`-- README.md
+3compare_t_genes/
+|-- data/                         matched cohorts and summaries
+|-- figures/                      spectrum comparison plots
+|-- mutation_comparison.py        reusable analysis and plotting functions
+|-- CompareTGenes.ipynb
+`-- README.md
+4tsss_gradient/
+|-- data/                         TSSS metadata and summaries
+|-- figures/                      mutation-gradient plots
+|-- TSSSMutationGradient.ipynb
+`-- README.md
 ```
 
-The plotter validates the shared cohort and all 12 components but never changes
-the cohort itself. See the compact examples in:
+## Analysis order
 
-- `notebooks/CommonSpeciesStatistics.ipynb`
-- `notebooks/CompareTGenes.ipynb`
-- `notebooks/TSSSMutationGradient.ipynb`
+1. `1init_data` documents and checks the supplied mutation-spectrum tables.
+2. `2species_intersection` counts the mammals shared by every gene combination
+   and records the exact members of each matched cohort.
+3. `3compare_t_genes` compares 12-component spectra for two to five genes using
+   the same species for every selected gene.
+4. `4tsss_gradient` explores changes in selected mutation types along an
+   explicit proxy for single-stranded duration.
+
+The main input for stages 2--4 is
+`1init_data/data/MutSpecVertebrates12.csv.gz`. Run notebooks in the numbered
+order when regenerating the complete analysis. Tables are written to the
+corresponding `data/` folder and plots to `figures/`; source data remain in
+`1init_data/data/`.
+
+See the README inside each stage for its assumptions, commands, outputs, and
+interpretation limits.
