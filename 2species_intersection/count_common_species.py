@@ -1,13 +1,14 @@
-"""Count species shared by every gene combination in a taxonomic class.
+"""Count species shared by every gene combination in the spectrum dataset.
 
 The script uses the ready 12-component mutation spectra rather than raw sequence
 metadata.  This matters because a species can have a sequence for a gene while
 still lacking a mutation spectrum that can be used in the downstream comparison.
 
-By default, inclusive intersections are calculated for all gene pairs, triples,
-and (when available) four-gene combinations among mammals.  "Inclusive" means
-that a species shared by four genes is also counted in each relevant pair and
-triple.  This is the sample size needed when a particular combination is analysed.
+By default, inclusive intersections are calculated across all vertebrate classes
+present in the input.  An exact value from the ``Class`` column can optionally be
+selected with ``--taxonomic-class``.  "Inclusive" means that a species shared by
+four genes is also counted in each relevant pair and triple.  This is the sample
+size needed when a particular combination is analysed.
 """
 
 from __future__ import annotations
@@ -45,13 +46,14 @@ EXPECTED_MUTATIONS = frozenset(
         "T>G",
     }
 )
+ALL_VERTEBRATES_LABEL = "All vertebrates"
 
 
 def load_gene_species_profiles(
     input_path: Path,
-    taxonomic_class: str,
+    taxonomic_class: str | None = None,
 ) -> pd.DataFrame:
-    """Return one row per gene/species profile in the requested class.
+    """Return one row per gene/species profile in the requested scope.
 
     Gene and species identifiers are matched exactly as stored in the spectrum
     file.  We intentionally do not replace underscores, change case, or merge
@@ -69,25 +71,34 @@ def load_gene_species_profiles(
         missing = ", ".join(sorted(missing_columns))
         raise ValueError(f"Missing required columns in {input_path}: {missing}")
 
-    class_mask = (
-        spectra["Class"].astype("string").str.strip().str.casefold()
-        == taxonomic_class.strip().casefold()
-    )
-    class_spectra = spectra.loc[class_mask].copy()
-
-    if class_spectra.empty:
-        available_classes = sorted(spectra["Class"].dropna().astype(str).unique())
-        raise ValueError(
-            f"No rows found for class {taxonomic_class!r}. "
-            f"Available classes: {available_classes}"
+    if taxonomic_class is None:
+        selected_spectra = spectra.copy()
+    else:
+        requested_class = taxonomic_class.strip()
+        if not requested_class:
+            raise ValueError("taxonomic_class must not be empty")
+        class_mask = (
+            spectra["Class"].astype("string").str.strip().str.casefold()
+            == requested_class.casefold()
         )
+        selected_spectra = spectra.loc[class_mask].copy()
+        if selected_spectra.empty:
+            available_classes = sorted(
+                spectra["Class"].dropna().astype(str).unique()
+            )
+            raise ValueError(
+                f"No rows found for class {taxonomic_class!r}. "
+                f"Available classes: {available_classes}"
+            )
 
-    if class_spectra[["Gene", "Species", "Mut"]].isna().any().any():
+    if selected_spectra.empty:
+        raise ValueError(f"No spectrum rows found in {input_path}")
+    if selected_spectra[["Gene", "Species", "Mut"]].isna().any().any():
         raise ValueError("Gene, Species, and Mut identifiers must not be missing")
-    if class_spectra.duplicated(["Gene", "Species", "Mut"]).any():
+    if selected_spectra.duplicated(["Gene", "Species", "Mut"]).any():
         raise ValueError("Duplicate Gene/Species/Mut rows were found")
 
-    mutation_sets = class_spectra.groupby(["Gene", "Species"])["Mut"].agg(
+    mutation_sets = selected_spectra.groupby(["Gene", "Species"])["Mut"].agg(
         frozenset
     )
     invalid_mutation_sets = mutation_sets[mutation_sets.ne(EXPECTED_MUTATIONS)]
@@ -97,22 +108,23 @@ def load_gene_species_profiles(
             "the exact 12 substitution categories"
         )
 
-    mutspec = pd.to_numeric(class_spectra["MutSpec"], errors="coerce")
+    mutspec = pd.to_numeric(selected_spectra["MutSpec"], errors="coerce")
     if mutspec.isna().any() or not np.isfinite(mutspec).all():
         raise ValueError("MutSpec values must be numeric, complete, and finite")
     if (mutspec < 0).any():
         raise ValueError("MutSpec values must be non-negative")
 
     profile_sums = mutspec.groupby(
-        [class_spectra["Gene"], class_spectra["Species"]]
+        [selected_spectra["Gene"], selected_spectra["Species"]]
     ).sum()
     if not np.allclose(profile_sums.to_numpy(), 1.0, rtol=0, atol=1e-8):
         raise ValueError("MutSpec must sum to one in every Gene/Species profile")
 
     # A spectrum contains one row per mutation type.  Dropping duplicates here
     # reduces it to the presence/absence table needed for set intersections.
+    # Class is retained so pooled vertebrate cohorts remain auditable.
     return (
-        class_spectra[["Gene", "Species"]]
+        selected_spectra[["Gene", "Species", "Class"]]
         .drop_duplicates()
         .sort_values(["Gene", "Species"])
     )
@@ -206,11 +218,11 @@ def make_gene_summary(species_by_gene: dict[str, set[str]]) -> pd.DataFrame:
 def print_results(
     gene_summary: pd.DataFrame,
     intersection_counts: pd.DataFrame,
-    taxonomic_class: str,
+    taxonomic_scope: str,
 ) -> None:
     """Print compact human-readable tables to the terminal."""
 
-    print(f"\nSpecies with usable spectra in class: {taxonomic_class}")
+    print(f"\nSpecies with usable spectra in scope: {taxonomic_scope}")
     print(gene_summary.to_string(index=False))
 
     if intersection_counts.empty:
@@ -236,8 +248,11 @@ def parse_args(args: Iterable[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--taxonomic-class",
-        default="Mammalia",
-        help="Value from the Class column to analyse (default: Mammalia)",
+        default=None,
+        help=(
+            "Optional exact value from the Class column. "
+            "Omit to analyse all vertebrate classes."
+        ),
     )
     parser.add_argument(
         "--max-combination-size",
@@ -275,14 +290,32 @@ def main(args: Iterable[str] | None = None) -> None:
         species_by_gene,
         max_combination_size=options.max_combination_size,
     )
+    species_classes = (
+        profiles[["Species", "Class"]]
+        .drop_duplicates()
+        .rename(columns={"Species": "species", "Class": "taxonomic_class"})
+    )
+    if species_classes["species"].duplicated().any():
+        raise ValueError("A species identifier occurs in more than one class")
+    intersection_members = intersection_members.merge(
+        species_classes,
+        on="species",
+        how="left",
+        validate="many_to_one",
+    )
 
     try:
         source_label = str(input_path.relative_to(PROJECT_ROOT))
     except ValueError:
         source_label = str(input_path)
+    scope_label = (
+        options.taxonomic_class.strip()
+        if options.taxonomic_class is not None
+        else ALL_VERTEBRATES_LABEL
+    )
     for table in (gene_summary, intersection_counts, intersection_members):
         table.insert(0, "source_file", source_label)
-        table.insert(0, "taxonomic_class", options.taxonomic_class.strip())
+        table.insert(0, "taxonomic_scope", scope_label)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     gene_summary.to_csv(output_dir / "gene_species_counts.csv", index=False)
@@ -293,7 +326,7 @@ def main(args: Iterable[str] | None = None) -> None:
         output_dir / "species_intersection_members.csv", index=False
     )
 
-    print_results(gene_summary, intersection_counts, options.taxonomic_class)
+    print_results(gene_summary, intersection_counts, scope_label)
     print(f"\nTables written to: {output_dir}")
 
 

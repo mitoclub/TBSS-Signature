@@ -210,3 +210,7 @@ __marimo__/
 
 # Agents stuff
 .agents/
+
+# Stage 6 local sequence and Python caches
+/6amino_acid_shift/data/midori/
+/6amino_acid_shift/__pycache__/

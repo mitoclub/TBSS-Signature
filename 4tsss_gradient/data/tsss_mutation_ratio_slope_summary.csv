@@ -1,0 +1,3 @@
+Ratio,NumeratorMut,DenominatorMut,n_species,mean_slope_per_proxy_unit,ci_low,ci_high,median_species_slope,fraction_species_positive,confidence
+C>T/G>A,C>T,G>A,85,2.919271445322882,2.113883613471557,3.771733427402508,2.123905659629758,0.8,0.95
+A>G/T>C,A>G,T>C,85,1.4983050596344811,0.9486316888467902,2.148976912417703,1.1698484164184293,0.7294117647058823,0.95

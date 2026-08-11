@@ -47,6 +47,11 @@ DEFAULT_GENE_LABELS = {
     "ND6": "ND6",
 }
 
+DEFAULT_MUTATION_RATIOS = {
+    "C>T/G>A": ("C>T", "G>A"),
+    "A>G/T>C": ("A>G", "T>C"),
+}
+
 _COMPLEMENT = str.maketrans("ACGT", "TGCA")
 
 
@@ -285,6 +290,7 @@ def summarize_matched_spectra(
     gene_col: str = "Gene",
     mutation_col: str = "Mut",
     value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
 ) -> pd.DataFrame:
     """Summarise matched spectra with species-cluster bootstrap intervals."""
 
@@ -296,6 +302,7 @@ def summarize_matched_spectra(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     )
     if estimator not in {"mean", "median"}:
         raise ValueError("estimator must be 'mean' or 'median'")
@@ -359,6 +366,7 @@ def plot_matched_spectra(
     gene_col: str = "Gene",
     mutation_col: str = "Mut",
     value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
 ) -> SpectrumPlotResult:
     """Plot estimates for 2--5 genes from an already matched DataFrame.
 
@@ -375,6 +383,7 @@ def plot_matched_spectra(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     )
     if kind not in {"dot", "heatmap"}:
         raise ValueError("kind must be 'dot' or 'heatmap'")
@@ -391,6 +400,7 @@ def plot_matched_spectra(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     )
     labels = {**DEFAULT_GENE_LABELS, **(gene_labels or {})}
     colors = _resolve_palette(info.genes, palette)
@@ -587,6 +597,9 @@ def plot_tsss_gradient(
     gene_col: str = "Gene",
     mutation_col: str = "Mut",
     value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
+    y_label: str = "Mean normalized spectrum weight",
+    figure_title: str = "Mutation spectrum gradient across matched species",
 ) -> SpectrumPlotResult:
     """Plot selected mutation weights against an explicit numeric TSSS proxy.
 
@@ -602,6 +615,7 @@ def plot_tsss_gradient(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     )
     selected_mutations = tuple(mutations)
     if not selected_mutations or len(set(selected_mutations)) != len(selected_mutations):
@@ -626,6 +640,7 @@ def plot_tsss_gradient(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     )
     summary = summarize_matched_spectra(
         data,
@@ -638,6 +653,7 @@ def plot_tsss_gradient(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     ).merge(metadata, on=gene_col, validate="many_to_one")
 
     n_panels = len(selected_mutations)
@@ -698,15 +714,14 @@ def plot_tsss_gradient(
         ax.set_title(mutation)
         ax.set_xticks(x, display_labels)
         ax.set_xlabel(proxy_label)
-        ax.set_ylabel("Mean normalized spectrum weight")
+        ax.set_ylabel(y_label)
         ax.legend(frameon=False, fontsize=9)
         sns.despine(ax=ax)
 
     for unused_axis in flat_axes[n_panels:]:
         unused_axis.set_visible(False)
     fig.suptitle(
-        f"Mutation spectrum gradient across matched species "
-        f"(N = {ordered_info.n_species})",
+        f"{figure_title} (N = {ordered_info.n_species})",
         y=1.01,
     )
     fig.tight_layout()
@@ -735,6 +750,7 @@ def summarize_tsss_slopes(
     gene_col: str = "Gene",
     mutation_col: str = "Mut",
     value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
 ) -> pd.DataFrame:
     """Summarise within-species linear slopes along a supplied TSSS proxy.
 
@@ -750,6 +766,7 @@ def summarize_tsss_slopes(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     )
     metadata = _validate_gene_metadata(
         gene_metadata,
@@ -767,6 +784,7 @@ def summarize_tsss_slopes(
         gene_col=gene_col,
         mutation_col=mutation_col,
         value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
     )
     selected_mutations = tuple(mutations)
     unknown_mutations = set(selected_mutations).difference(ordered_info.mutations)
@@ -813,6 +831,438 @@ def summarize_tsss_slopes(
             }
         )
     return pd.DataFrame.from_records(records)
+
+
+def calculate_mutation_ratios(
+    data: pd.DataFrame,
+    *,
+    genes: Sequence[str],
+    ratios: Mapping[str, tuple[str, str]] = DEFAULT_MUTATION_RATIOS,
+    mutation_order: Sequence[str] = SBS12_ORDER,
+    value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
+    zero_denominator: str = "raise",
+    species_col: str = "Species",
+    class_col: str = "Class",
+    gene_col: str = "Gene",
+    mutation_col: str = "Mut",
+) -> pd.DataFrame:
+    """Calculate mutation ratios within every matched species/gene profile.
+
+    Ratios are calculated before any cross-species summary.  The default policy
+    raises on a zero denominator instead of silently adding a pseudocount.
+    ``zero_denominator='drop_species'`` removes an affected species from every
+    gene and ratio so that the matched design is retained.
+    """
+
+    info = validate_matched_spectra(
+        data,
+        genes=genes,
+        mutation_order=mutation_order,
+        species_col=species_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+    )
+    ratio_definitions = _normalise_ratio_definitions(ratios, info.mutations)
+    if zero_denominator not in {"raise", "drop_species"}:
+        raise ValueError(
+            "zero_denominator must be either 'raise' or 'drop_species'"
+        )
+
+    index_columns = [species_col, gene_col]
+    if class_col in data.columns:
+        index_columns.insert(1, class_col)
+    values = (
+        data.pivot(
+            index=index_columns,
+            columns=mutation_col,
+            values=value_col,
+        )
+        .reindex(columns=list(info.mutations))
+        .sort_index()
+    )
+
+    invalid_species: set[object] = set()
+    for _, (_, denominator_mutation) in ratio_definitions.items():
+        invalid = values[denominator_mutation].le(0)
+        if invalid.any():
+            invalid_species.update(
+                values.index.get_level_values(species_col)[invalid]
+            )
+
+    if invalid_species and zero_denominator == "raise":
+        examples = sorted(invalid_species, key=str)[:5]
+        raise ValueError(
+            "Mutation-ratio denominators must be positive; affected species "
+            f"include {examples}"
+        )
+    if invalid_species:
+        keep = ~values.index.get_level_values(species_col).isin(invalid_species)
+        values = values.loc[keep]
+        if values.empty:
+            raise ValueError("No matched species remain after denominator filtering")
+
+    records: list[pd.DataFrame] = []
+    for ratio_label, (numerator_mutation, denominator_mutation) in (
+        ratio_definitions.items()
+    ):
+        ratio_table = values[[numerator_mutation, denominator_mutation]].reset_index()
+        ratio_table = ratio_table.rename(
+            columns={
+                numerator_mutation: "NumeratorValue",
+                denominator_mutation: "DenominatorValue",
+            }
+        )
+        ratio_table["Ratio"] = ratio_label
+        ratio_table["NumeratorMut"] = numerator_mutation
+        ratio_table["DenominatorMut"] = denominator_mutation
+        ratio_table["RatioValue"] = (
+            ratio_table["NumeratorValue"] / ratio_table["DenominatorValue"]
+        )
+        records.append(ratio_table)
+
+    result = pd.concat(records, ignore_index=True)
+    if not np.isfinite(result["RatioValue"]).all():
+        raise ValueError("Mutation ratios must be finite")
+    output_columns = [species_col]
+    if class_col in result.columns:
+        output_columns.append(class_col)
+    output_columns.extend(
+        [
+            gene_col,
+            "Ratio",
+            "NumeratorMut",
+            "DenominatorMut",
+            "NumeratorValue",
+            "DenominatorValue",
+            "RatioValue",
+        ]
+    )
+    return result.loc[:, output_columns].sort_values(
+        ["Ratio", species_col, gene_col]
+    ).reset_index(drop=True)
+
+
+def plot_tsss_ratio_gradient(
+    data: pd.DataFrame,
+    gene_metadata: pd.DataFrame,
+    *,
+    genes: Sequence[str],
+    ratios: Mapping[str, tuple[str, str]] = DEFAULT_MUTATION_RATIOS,
+    tsss_col: str = "dssh_proxy",
+    label_col: str = "display_gene",
+    proxy_label: str = "Relative single-stranded duration proxy (DssH)",
+    mutation_order: Sequence[str] = SBS12_ORDER,
+    value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
+    zero_denominator: str = "raise",
+    confidence: float = 0.95,
+    n_boot: int = 2_000,
+    random_state: int | np.random.Generator = 0,
+    show_species_lines: bool = True,
+    species_col: str = "Species",
+    class_col: str = "Class",
+    gene_col: str = "Gene",
+    mutation_col: str = "Mut",
+) -> SpectrumPlotResult:
+    """Plot per-species mutation ratios against a numeric TSSS proxy."""
+
+    if not 0 < confidence < 1:
+        raise ValueError("confidence must be between zero and one")
+    if n_boot < 1:
+        raise ValueError("n_boot must be at least one")
+
+    info = validate_matched_spectra(
+        data,
+        genes=genes,
+        mutation_order=mutation_order,
+        species_col=species_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+    )
+    metadata = _validate_gene_metadata(
+        gene_metadata,
+        info.genes,
+        gene_col=gene_col,
+        tsss_col=tsss_col,
+        label_col=label_col,
+    )
+    ordered_genes = tuple(metadata[gene_col])
+    ratio_definitions = _normalise_ratio_definitions(ratios, info.mutations)
+    ratio_values = calculate_mutation_ratios(
+        data,
+        genes=ordered_genes,
+        ratios=ratio_definitions,
+        mutation_order=mutation_order,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+        zero_denominator=zero_denominator,
+        species_col=species_col,
+        class_col=class_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+    )
+    ratio_labels = tuple(ratio_definitions)
+    species = tuple(sorted(ratio_values[species_col].unique(), key=str))
+    values = _ratio_value_array(
+        ratio_values,
+        species,
+        ordered_genes,
+        ratio_labels,
+        species_col=species_col,
+        gene_col=gene_col,
+    )
+    estimates = values.mean(axis=0)
+    medians = np.median(values, axis=0)
+    bootstrap = _bootstrap_estimates(
+        values,
+        estimate_function=np.mean,
+        n_boot=n_boot,
+        random_state=random_state,
+    )
+    alpha = (1 - confidence) / 2
+    lows, highs = np.quantile(bootstrap, [alpha, 1 - alpha], axis=0)
+
+    summary_records = []
+    for gene_index, gene in enumerate(ordered_genes):
+        for ratio_index, ratio_label in enumerate(ratio_labels):
+            numerator, denominator = ratio_definitions[ratio_label]
+            summary_records.append(
+                {
+                    gene_col: gene,
+                    "Ratio": ratio_label,
+                    "NumeratorMut": numerator,
+                    "DenominatorMut": denominator,
+                    "n_species": len(species),
+                    "estimate": float(estimates[gene_index, ratio_index]),
+                    "ci_low": float(lows[gene_index, ratio_index]),
+                    "ci_high": float(highs[gene_index, ratio_index]),
+                    "median": float(medians[gene_index, ratio_index]),
+                    "confidence": confidence,
+                }
+            )
+    summary = pd.DataFrame.from_records(summary_records).merge(
+        metadata, on=gene_col, validate="many_to_one"
+    )
+
+    n_panels = len(ratio_labels)
+    fig, axes = plt.subplots(
+        1,
+        n_panels,
+        figsize=(6.3 * n_panels, 4.6),
+        sharex=True,
+        squeeze=False,
+    )
+    flat_axes = axes.ravel()
+    x = metadata[tsss_col].to_numpy(dtype=float)
+    display_labels = metadata[label_col].astype(str).to_list()
+    colors = dict(zip(ratio_labels, sns.color_palette("colorblind", n_panels)))
+
+    for ratio_index, ratio_label in enumerate(ratio_labels):
+        ax = flat_axes[ratio_index]
+        ratio_matrix = values[:, :, ratio_index]
+        if show_species_lines:
+            for species_values in ratio_matrix:
+                ax.plot(x, species_values, color="#64748B", alpha=0.09, linewidth=0.7)
+        ratio_summary = (
+            summary.loc[summary["Ratio"].eq(ratio_label)]
+            .set_index(gene_col)
+            .loc[list(ordered_genes)]
+        )
+        ratio_estimates = ratio_summary["estimate"].to_numpy(dtype=float)
+        errors = np.vstack(
+            [
+                ratio_estimates - ratio_summary["ci_low"].to_numpy(dtype=float),
+                ratio_summary["ci_high"].to_numpy(dtype=float) - ratio_estimates,
+            ]
+        )
+        ax.errorbar(
+            x,
+            ratio_estimates,
+            yerr=errors,
+            color=colors[ratio_label],
+            marker="o",
+            markersize=6,
+            linewidth=2,
+            capsize=4,
+            label=f"Mean ({int(confidence * 100)}% bootstrap CI)",
+        )
+        ax.set_title(ratio_label)
+        ax.set_xticks(x, display_labels)
+        ax.set_xlabel(proxy_label)
+        ax.set_ylabel("Mean per-species mutation ratio")
+        ax.legend(frameon=False, fontsize=9)
+        sns.despine(ax=ax)
+
+    fig.suptitle(
+        f"Mutation-ratio gradient across matched species (N = {len(species)})",
+        y=1.02,
+    )
+    fig.tight_layout()
+    return SpectrumPlotResult(
+        fig,
+        axes if n_panels > 1 else flat_axes[0],
+        summary,
+        ordered_genes,
+        len(species),
+    )
+
+
+def summarize_tsss_ratio_slopes(
+    data: pd.DataFrame,
+    gene_metadata: pd.DataFrame,
+    *,
+    genes: Sequence[str],
+    ratios: Mapping[str, tuple[str, str]] = DEFAULT_MUTATION_RATIOS,
+    tsss_col: str = "dssh_proxy",
+    label_col: str = "display_gene",
+    mutation_order: Sequence[str] = SBS12_ORDER,
+    value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
+    zero_denominator: str = "raise",
+    confidence: float = 0.95,
+    n_boot: int = 2_000,
+    random_state: int | np.random.Generator = 0,
+    species_col: str = "Species",
+    class_col: str = "Class",
+    gene_col: str = "Gene",
+    mutation_col: str = "Mut",
+) -> pd.DataFrame:
+    """Summarise within-species slopes of mutation ratios along a TSSS proxy."""
+
+    if not 0 < confidence < 1:
+        raise ValueError("confidence must be between zero and one")
+    if n_boot < 1:
+        raise ValueError("n_boot must be at least one")
+
+    info = validate_matched_spectra(
+        data,
+        genes=genes,
+        mutation_order=mutation_order,
+        species_col=species_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+    )
+    metadata = _validate_gene_metadata(
+        gene_metadata,
+        info.genes,
+        gene_col=gene_col,
+        tsss_col=tsss_col,
+        label_col=label_col,
+    )
+    ordered_genes = tuple(metadata[gene_col])
+    ratio_definitions = _normalise_ratio_definitions(ratios, info.mutations)
+    ratio_values = calculate_mutation_ratios(
+        data,
+        genes=ordered_genes,
+        ratios=ratio_definitions,
+        mutation_order=mutation_order,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+        zero_denominator=zero_denominator,
+        species_col=species_col,
+        class_col=class_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+    )
+    ratio_labels = tuple(ratio_definitions)
+    species = tuple(sorted(ratio_values[species_col].unique(), key=str))
+    values = _ratio_value_array(
+        ratio_values,
+        species,
+        ordered_genes,
+        ratio_labels,
+        species_col=species_col,
+        gene_col=gene_col,
+    )
+
+    x = metadata[tsss_col].to_numpy(dtype=float)
+    centered_x = x - x.mean()
+    denominator = float(np.sum(centered_x**2))
+    if np.isclose(denominator, 0):
+        raise ValueError(f"{tsss_col} must vary across genes")
+    slopes = np.sum(values * centered_x[None, :, None], axis=1) / denominator
+    rng = _as_rng(random_state)
+    draws = rng.integers(0, len(species), size=(n_boot, len(species)))
+    bootstrap_means = slopes[draws].mean(axis=1)
+    alpha = (1 - confidence) / 2
+    lows, highs = np.quantile(bootstrap_means, [alpha, 1 - alpha], axis=0)
+
+    records = []
+    for ratio_index, ratio_label in enumerate(ratio_labels):
+        numerator, denominator_mutation = ratio_definitions[ratio_label]
+        ratio_slopes = slopes[:, ratio_index]
+        records.append(
+            {
+                "Ratio": ratio_label,
+                "NumeratorMut": numerator,
+                "DenominatorMut": denominator_mutation,
+                "n_species": len(species),
+                "mean_slope_per_proxy_unit": float(ratio_slopes.mean()),
+                "ci_low": float(lows[ratio_index]),
+                "ci_high": float(highs[ratio_index]),
+                "median_species_slope": float(np.median(ratio_slopes)),
+                "fraction_species_positive": float(np.mean(ratio_slopes > 0)),
+                "confidence": confidence,
+            }
+        )
+    return pd.DataFrame.from_records(records)
+
+
+def _normalise_ratio_definitions(
+    ratios: Mapping[str, tuple[str, str]],
+    available_mutations: Sequence[str],
+) -> dict[str, tuple[str, str]]:
+    if not ratios:
+        raise ValueError("ratios must contain at least one definition")
+    available = set(available_mutations)
+    normalised: dict[str, tuple[str, str]] = {}
+    for label, pair in ratios.items():
+        if not str(label).strip():
+            raise ValueError("ratio labels must not be empty")
+        if len(pair) != 2:
+            raise ValueError(f"Ratio {label!r} must contain two mutations")
+        numerator, denominator = pair
+        missing = {numerator, denominator}.difference(available)
+        if missing:
+            raise ValueError(
+                f"Ratio {label!r} contains unknown mutations: {sorted(missing)}"
+            )
+        normalised[str(label)] = (numerator, denominator)
+    return normalised
+
+
+def _ratio_value_array(
+    ratio_values: pd.DataFrame,
+    species: Sequence[object],
+    genes: Sequence[str],
+    ratios: Sequence[str],
+    *,
+    species_col: str,
+    gene_col: str,
+) -> np.ndarray:
+    columns = pd.MultiIndex.from_product(
+        [genes, ratios], names=[gene_col, "Ratio"]
+    )
+    matrix = (
+        ratio_values.pivot(
+            index=species_col,
+            columns=[gene_col, "Ratio"],
+            values="RatioValue",
+        )
+        .reindex(index=list(species), columns=columns)
+    )
+    if matrix.isna().any().any():
+        raise ValueError("Mutation-ratio table is not complete across species and genes")
+    return matrix.to_numpy(dtype=float).reshape(
+        len(species), len(genes), len(ratios)
+    )
 
 
 def _normalise_genes(genes: Sequence[str]) -> tuple[str, ...]:
@@ -944,16 +1394,20 @@ def _validate_gene_metadata(
 
 __all__ = [
     "DEFAULT_GENE_LABELS",
+    "DEFAULT_MUTATION_RATIOS",
     "MatchedSpectrumInfo",
     "SBS12_ORDER",
     "SpectrumPlotResult",
+    "calculate_mutation_ratios",
     "complement_substitution",
     "orient_substitutions_to_heavy_strand",
     "plot_matched_spectra",
     "plot_mutation_comparison",
     "plot_tsss_gradient",
+    "plot_tsss_ratio_gradient",
     "select_common_species",
     "summarize_matched_spectra",
     "summarize_tsss_slopes",
+    "summarize_tsss_ratio_slopes",
     "validate_matched_spectra",
 ]

@@ -1,0 +1,7 @@
+exclusion_reason,n_species
+not found in MIDORI2,0
+ambiguous taxonomic match,0
+gene missing,0
+partial/problematic CDS,1
+translation mismatch,0
+other QC failure,0

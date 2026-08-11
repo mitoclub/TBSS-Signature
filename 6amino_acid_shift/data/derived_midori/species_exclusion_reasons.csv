@@ -1,0 +1,2 @@
+Species,exclusion_reason,match_status,missing_genes,sequence_qc_details,selected_accession,notes
+Cricetulus_kamensis,partial/problematic CDS,taxid_confirmed,,partial_CDS,CO1:KJ680375.1;CO3:MH161654.1;Cytb:KJ680375.1,MIDORI2 GB272 UNIQ_NUC+TOTAL_AA; selection_mode=best_gene_specific_fallback; same accession across all three=False

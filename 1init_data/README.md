@@ -16,6 +16,10 @@ later stages read them but do not modify them.
   supporting observed and expected mutation information.
 - `data/info.csv` contains supporting sample metadata.
 
+The source table contains five values in its `Class` column: `Actinopteri`,
+`Amphibia`, `Aves`, `Lepidosauria`, and `Mammalia`. Downstream notebooks include
+all five by default; stages 2--4 provide an optional single-class filter.
+
 The downstream 12-component workflow expects at least the columns `Gene`,
 `Class`, `Species`, `Mut`, and `MutSpec`. A usable gene/species profile must have
 one row for every one of the 12 single-base substitutions, finite non-negative
@@ -44,6 +48,9 @@ diagnostic; authoritative species intersections are generated in
 
 - Gene and species identifiers are preserved exactly as supplied; no taxonomy
   aliases or spelling variants are reconciled here.
+- The five source `Class` labels describe the taxa available in this dataset;
+  they should not be read as an exhaustive or taxonomically reclassified sample
+  of Vertebrata.
 - Missing values or incomplete profiles must not be interpreted as biological
   absence.
 - The source tables should be replaced only deliberately, because doing so can

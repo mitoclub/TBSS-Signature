@@ -1,0 +1,4 @@
+Gene,display_gene,arc_position,rCRS_start,rCRS_end,rCRS_midpoint,dssh_proxy
+CO1,COX1,beginning,5904,7445,6674.5,0.1140080873921178
+CO3,COX3,middle,9207,9990,9598.5,0.46695636429476733
+Cytb,CytB,end,14747,15887,15317.0,1.1572213169171344
