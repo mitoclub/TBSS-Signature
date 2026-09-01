@@ -1,93 +1,144 @@
-"""Verify persisted invariants of the stage-6 MIDORI2 analysis."""
+"""Verify the minimal MIDORI2 data contract and notebook figures."""
 
 from __future__ import annotations
 
+from collections import Counter
 import gzip
-import hashlib
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
+from PIL import Image
+
+from .utils import TARGET_GENES, sha256
 
 
-def repository_root() -> Path:
-    here = Path.cwd().resolve()
-    for candidate in (here, *here.parents):
-        if (candidate / "6amino_acid_shift" / "midori_analysis.py").exists():
-            return candidate
-    raise FileNotFoundError("Run from the repository root or 6amino_acid_shift")
+PSEUDOCOUNT = 0.5
+OBSOLETE_OUTPUTS = {
+    "amino_acid_counts_by_species_gene.csv",
+    "amino_acid_ratio_monotonic_trend.csv",
+    "amino_acid_ratio_paired_tests.csv",
+    "amino_acid_ratio_summary_by_gene.csv",
+    "amino_acid_ratios_by_species_gene.csv",
+    "analysis_species.csv",
+    "midori_record_consistency.csv",
+    "midori_sequence_manifest.csv.gz",
+    "midori_species_catalog.csv",
+    "sequence_qc.csv.gz",
+    "species_gene_availability.csv",
+    "species_inclusion_status.csv",
+    "species_intersection_summary.csv",
+}
 
 
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+def _ratios(row: object) -> tuple[float, float]:
+    amino_acids = Counter(str(row.computed_translation).rstrip("*"))
+    coding = str(row.coding_cds_sequence)
+    codons = [coding[index:index + 3] for index in range(0, len(coding) - 2, 3)]
+    leucine_ttr = sum(codon in {"TTA", "TTG"} for codon in codons)
+    return (
+        (amino_acids["N"] + amino_acids["K"] + PSEUDOCOUNT)
+        / (amino_acids["G"] + PSEUDOCOUNT),
+        (amino_acids["P"] + PSEUDOCOUNT)
+        / (amino_acids["F"] + leucine_ttr + PSEUDOCOUNT),
+    )
 
 
 def main() -> None:
-    root = repository_root()
-    stage = root / "6amino_acid_shift"
-    cache = stage / "data" / "midori"
+    stage = Path(__file__).resolve().parent
     derived = stage / "data" / "derived_midori"
+    cache = stage / "data" / "midori"
 
-    files = pd.read_csv(derived / "midori_file_manifest.csv", dtype=str)
-    assert len(files) == 6
+    files = pd.read_csv(derived / "midori_file_manifest.csv", dtype={"sha256": str})
+    assert len(files) == 2 * len(TARGET_GENES)
+    assert set(files["Gene"]) == TARGET_GENES
+    assert set(files["molecule"]) == {"NUC", "AA"}
+    assert files[["Gene", "molecule"]].duplicated().sum() == 0
     for row in files.itertuples(index=False):
         path = cache / row.filename
-        assert path.exists(), path
-        assert path.stat().st_size == int(row.compressed_bytes), path
-        assert sha256(path) == row.sha256, path
-        with gzip.open(path, "rb") as handle:
-            assert handle.read(1) == b">", path
+        assert path.exists() and path.stat().st_size == int(row.compressed_bytes)
+        assert sha256(path) == row.sha256
+        with gzip.open(path, "rt", encoding="utf-8") as handle:
+            assert handle.readline().startswith(">")
 
-    availability = pd.read_csv(derived / "species_gene_availability.csv")
-    qc = pd.read_csv(derived / "sequence_qc.csv")
-    final = pd.read_csv(derived / "final_common_species.csv")
-    matching = pd.read_csv(derived / "species_midori_matching.csv")
-    consistency = pd.read_csv(derived / "midori_record_consistency.csv")
-    manifest = pd.read_csv(derived / "midori_sequence_manifest.csv")
-    canonical = pd.read_csv(derived / "midori_gene_sequences.csv.gz")
-
-    assert len(availability) == 52
-    assert availability[["has_seq_CO1", "has_seq_CO3", "has_seq_Cytb"]].all().all()
-    assert int(availability["included_final"].sum()) == 51
-    assert len(final) == 51 and final["Species"].is_unique
-    assert set(final["Species"]) == set(
-        availability.loc[availability["included_final"], "Species"]
+    sequences = pd.read_csv(
+        derived / "midori_gene_sequences.csv.gz",
+        dtype={"TaxID": str},
     )
-    assert len(qc) == len(canonical) == 52 * 3
-    assert int(qc["sequence_qc_status"].eq("pass").sum()) == 51 * 3 + 2
-    assert qc["same_feature_pair"].all()
-    assert qc["translation_match"].all()
-    final_qc = qc.loc[qc["Species"].isin(final["Species"])]
-    assert len(final_qc) == 51 * 3
-    assert final_qc["sequence_qc_status"].eq("pass").all()
-    assert matching["match_status"].isin(["exact", "taxid_confirmed"]).all()
-    assert int(consistency["same_accession_all_three"].sum()) == 50
-    assert manifest.loc[manifest["selected"], ["Species", "Gene"]].duplicated().sum() == 0
-    assert len(manifest.loc[manifest["selected"]]) == 52 * 3
+    required = {
+        "Species", "TaxID", "Gene", "coding_cds_sequence",
+        "computed_translation", "sequence_qc_status", "translation_match",
+        "same_feature_pair", "transl_table",
+    }
+    assert required.issubset(sequences.columns)
+    assert not sequences.duplicated(["Species", "Gene"]).any()
+    assert set(sequences["Gene"]) == TARGET_GENES
+    assert sequences.groupby("Species")["Gene"].nunique().eq(len(TARGET_GENES)).all()
+    assert sequences.groupby("Species")["TaxID"].nunique().eq(1).all()
+    assert sequences["sequence_qc_status"].eq("pass").all()
+    assert sequences["translation_match"].eq(True).all()
+    assert sequences["same_feature_pair"].eq(True).all()
+    assert sequences["transl_table"].eq(2).all()
 
-    composition = pd.read_csv(derived / "observed_amino_acid_composition.csv")
-    opportunities = pd.read_csv(derived / "codon_mutational_opportunities.csv.gz")
-    predicted = pd.read_csv(derived / "mutation_weighted_amino_acid_shifts.csv")
-    assert len(composition) == 51 * 3 * 20
-    assert set(composition["Species"]) == set(final["Species"])
-    assert set(opportunities["Species"]) == set(final["Species"])
-    assert len(predicted) == 51 * 3 * 20
-    assert predicted["combined_predicted_shift"].notna().all()
+    ratio_rows = []
+    for row in sequences.itertuples(index=False):
+        ratio_rows.append((row.Species, row.Gene, *_ratios(row)))
+    ratios = pd.DataFrame(
+        ratio_rows,
+        columns=["Species", "Gene", "(Asn+Lys)/Gly", "Pro/(Phe+LeuTTR)"],
+    )
+    assert np.isfinite(ratios.iloc[:, 2:].to_numpy()).all()
+    for ratio_name in ratios.columns[2:]:
+        wide = ratios.pivot(index="Species", columns="Gene", values=ratio_name)
+        assert np.median(wide["Cytb"] / wide["CO1"]) > 1
 
-    notebook = json.loads((stage / "AminoAcidShift.ipynb").read_text(encoding="utf-8"))
+    notebook_path = stage / "AminoAcidShift.ipynb"
+    notebook = json.loads(notebook_path.read_text(encoding="utf-8"))
     assert notebook["nbformat"] == 4
+    code = "\n".join(
+        "".join(cell["source"])
+        for cell in notebook["cells"]
+        if cell["cell_type"] == "code"
+    )
     for index, cell in enumerate(notebook["cells"]):
         if cell["cell_type"] == "code":
             compile("".join(cell["source"]), f"notebook-cell-{index}", "exec")
+    assert ".to_csv(" not in code
+    assert "friedmanchisquare" in code
+    assert "page_trend_test" in code
+    assert "Kendall's W" in code
+    assert "holm_adjust" in code
+    assert "p-value Holm (45 pairs)" in code
+    assert "wilcoxon" in code.casefold()
+    assert "alternative='greater'" in code
+    assert "alternative='two-sided'" not in code
+    assert "combinations(range(len(GENE_ORDER)), 2)" in code
+    assert "counts['Pro/Phe']" not in code
+    assert "PSEUDOCOUNT = 0.5" in code
+    assert "paired wilcoxon, one-sided" in code.casefold()
+    assert "+ 'p-value ' + format_p_value(endpoint_p)" in code
+    assert "$H_1$" not in code
+    assert "bootstrap" not in code.casefold()
 
-    figure = stage / "figures" / "midori" / "main_amino_acid_shift.png"
-    assert figure.exists() and figure.stat().st_size > 10_000, figure
+    for stem in ("amino_acid_ratios_by_gene", "paired_ratio_fold_changes"):
+        png = stage / "figures" / f"{stem}.png"
+        pdf = stage / "figures" / f"{stem}.pdf"
+        assert png.exists() and png.stat().st_size > 50_000
+        assert pdf.exists() and pdf.stat().st_size > 10_000
+        with Image.open(png) as image:
+            assert image.width >= 2_000 and image.height >= 1_000
+        assert pdf.read_bytes()[:4] == b"%PDF"
 
-    print("MIDORI2 verification passed: 52 species found, 51 final, 50 shared-accession.")
+    assert not any((derived / name).exists() for name in OBSOLETE_OUTPUTS)
+    assert not (stage / "figures" / "midori" / "main_amino_acid_shift.png").exists()
+
+    print(
+        "MIDORI2 verification passed: "
+        f"{sequences['Species'].nunique():,} paired species, "
+        f"{len(TARGET_GENES)} Major Arc genes, two minimal data outputs, "
+        "and two publication-style figures."
+    )
 
 
 if __name__ == "__main__":

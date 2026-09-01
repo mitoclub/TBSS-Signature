@@ -14,14 +14,18 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from itertools import combinations
 from math import ceil
 
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
+from matplotlib.colors import to_rgba
 from matplotlib.figure import Figure
+from matplotlib.ticker import FuncFormatter, LogLocator
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from scipy.stats import wilcoxon
 
 
 SBS12_ORDER = (
@@ -46,6 +50,27 @@ DEFAULT_GENE_LABELS = {
     "ND2": "ND2",
     "ND6": "ND6",
 }
+
+DEFAULT_GENE_COLORS = {
+    "CO1": "#0072B2",
+    "CO3": "#E69F00",
+    "Cytb": "#009E73",
+    "ND2": "#CC79A7",
+    "ND6": "#D55E00",
+}
+
+_OKABE_ITO = (
+    "#0072B2",
+    "#E69F00",
+    "#009E73",
+    "#CC79A7",
+    "#D55E00",
+    "#56B4E9",
+    "#F0E442",
+    "#000000",
+)
+_PLOT_TEXT = "#20262E"
+_PAIRED_LINE = "#667085"
 
 DEFAULT_MUTATION_RATIOS = {
     "C>T/G>A": ("C>T", "G>A"),
@@ -77,6 +102,7 @@ class SpectrumPlotResult:
     summary: pd.DataFrame
     genes: tuple[str, ...]
     n_species: int
+    pairwise_tests: pd.DataFrame | None = None
 
 
 def complement_substitution(mutation: str) -> str:
@@ -479,13 +505,21 @@ def plot_mutation_comparison(
     random_state: int | np.random.Generator = 0,
     palette: Mapping[str, object] | Sequence[object] | None = None,
     show_species_lines: bool = True,
+    pairwise_alternative: str = "two-sided",
     ax: Axes | None = None,
     species_col: str = "Species",
     gene_col: str = "Gene",
     mutation_col: str = "Mut",
     value_col: str = "MutSpec",
 ) -> SpectrumPlotResult:
-    """Show a paired distribution for one mutation across 2--5 genes."""
+    """Show a paired distribution for one mutation across 2--5 genes.
+
+    ``pairwise_alternative`` describes Gene2 relative to Gene1 for every pair:
+    ``"greater"`` tests Gene2 > Gene1, ``"less"`` tests Gene2 < Gene1, and
+    ``"two-sided"`` retains the compatibility default.  The observations are
+    paired by species, so the test is Wilcoxon's signed-rank test rather than
+    the unpaired Mann--Whitney U test.
+    """
 
     info = validate_matched_spectra(
         data,
@@ -522,60 +556,51 @@ def plot_mutation_comparison(
         mutation_col=mutation_col,
         value_col=value_col,
     )
+    pairwise_tests = _paired_wilcoxon_tests(
+        values,
+        info.genes,
+        comparison_label=mutation,
+        comparison_col=mutation_col,
+        alternative=pairwise_alternative,
+    )
 
     if ax is None:
-        fig, ax = plt.subplots(figsize=(max(6.2, 1.45 * len(info.genes)), 5.7))
+        fig, ax = plt.subplots(figsize=(max(3.5, 1.55 * len(info.genes)), 3.45))
     else:
         fig = ax.figure
-    x = np.arange(len(info.genes), dtype=float)
-
-    if show_species_lines:
-        for species_values in values:
-            ax.plot(x, species_values, color="#718096", alpha=0.10, linewidth=0.7)
-    boxplot = ax.boxplot(
-        [values[:, index] for index in range(len(info.genes))],
-        positions=x,
-        widths=0.46,
-        patch_artist=True,
-        showfliers=False,
-        tick_labels=[labels.get(gene, gene) for gene in info.genes],
+    _draw_paired_boxplot(
+        ax,
+        values,
+        info.genes,
+        labels,
+        colors,
+        show_species_lines=show_species_lines,
     )
-    for patch, gene in zip(boxplot["boxes"], info.genes):
-        patch.set_facecolor(colors[gene])
-        patch.set_alpha(0.30)
-    for median in boxplot["medians"]:
-        median.set_color("#1A202C")
-
-    ordered_summary = mutation_summary.set_index(gene_col).loc[list(info.genes)]
-    estimates = ordered_summary["estimate"].to_numpy(dtype=float)
-    errors = np.vstack(
-        [
-            estimates - ordered_summary["ci_low"].to_numpy(dtype=float),
-            ordered_summary["ci_high"].to_numpy(dtype=float) - estimates,
-        ]
+    _style_paired_axis(ax)
+    ax.set_ylabel("Normalized spectrum weight")
+    ax.set_title(
+        f"{mutation}  ·  N = {info.n_species} paired species",
+        loc="left",
+        fontsize=10.5,
+        fontweight="bold",
+        pad=8,
     )
-    ax.errorbar(
-        x,
-        estimates,
-        yerr=errors,
-        fmt="D",
-        color="#111827",
-        ecolor="#111827",
-        capsize=4,
-        markersize=5,
-        linewidth=1.4,
-        label=f"Mean ({int(confidence * 100)}% bootstrap CI)",
+    _annotate_pairwise_tests(
+        ax,
+        pairwise_tests,
+        info.genes,
+        gene_labels=labels,
+        y_position=0.90,
+        stacked_single=True,
     )
-    ax.set(
-        xlabel="Gene",
-        ylabel="Normalized spectrum weight",
-        title=f"Matched {mutation} comparison (N = {info.n_species} species)",
-    )
-    ax.legend(frameon=False)
-    sns.despine(ax=ax)
-    fig.tight_layout()
+    fig.tight_layout(pad=0.7)
     return SpectrumPlotResult(
-        fig, ax, mutation_summary, info.genes, info.n_species
+        fig,
+        ax,
+        mutation_summary,
+        info.genes,
+        info.n_species,
+        pairwise_tests,
     )
 
 
@@ -945,6 +970,216 @@ def calculate_mutation_ratios(
     ).reset_index(drop=True)
 
 
+def plot_mutation_ratio_comparison(
+    data: pd.DataFrame,
+    *,
+    genes: Sequence[str],
+    ratios: Mapping[str, tuple[str, str]] = DEFAULT_MUTATION_RATIOS,
+    mutation_order: Sequence[str] = SBS12_ORDER,
+    gene_labels: Mapping[str, str] | None = None,
+    value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
+    zero_denominator: str = "raise",
+    confidence: float = 0.95,
+    n_boot: int = 2_000,
+    random_state: int | np.random.Generator = 0,
+    palette: Mapping[str, object] | Sequence[object] | None = None,
+    show_species_lines: bool = True,
+    pairwise_alternative: str = "two-sided",
+    log_y: bool = True,
+    species_col: str = "Species",
+    class_col: str = "Class",
+    gene_col: str = "Gene",
+    mutation_col: str = "Mut",
+) -> SpectrumPlotResult:
+    """Show paired distributions of within-profile mutation ratios by gene.
+
+    Each ratio is calculated separately for every species/gene profile before
+    any cross-species summary. Boxplots and optional species trajectories
+    therefore retain the matched-species design. ``pairwise_alternative``
+    describes Gene2 relative to Gene1; see :func:`plot_mutation_comparison`.
+    The log scale is the default because within-profile ratios are non-negative
+    and characteristically right-skewed. If an observed numerator is exactly
+    zero, a narrow linear segment at zero is combined with the logarithmic
+    positive range; no pseudocount is introduced.
+    """
+
+    if not 0 < confidence < 1:
+        raise ValueError("confidence must be between zero and one")
+    if n_boot < 1:
+        raise ValueError("n_boot must be at least one")
+
+    info = validate_matched_spectra(
+        data,
+        genes=genes,
+        mutation_order=mutation_order,
+        species_col=species_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+    )
+    ratio_definitions = _normalise_ratio_definitions(ratios, info.mutations)
+    ratio_values = calculate_mutation_ratios(
+        data,
+        genes=info.genes,
+        ratios=ratio_definitions,
+        mutation_order=mutation_order,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+        zero_denominator=zero_denominator,
+        species_col=species_col,
+        class_col=class_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+    )
+    ratio_labels = tuple(ratio_definitions)
+    species = tuple(sorted(ratio_values[species_col].unique(), key=str))
+    values = _ratio_value_array(
+        ratio_values,
+        species,
+        info.genes,
+        ratio_labels,
+        species_col=species_col,
+        gene_col=gene_col,
+    )
+
+    estimates = values.mean(axis=0)
+    medians = np.median(values, axis=0)
+    bootstrap = _bootstrap_estimates(
+        values,
+        estimate_function=np.mean,
+        n_boot=n_boot,
+        random_state=random_state,
+    )
+    alpha = (1 - confidence) / 2
+    lows, highs = np.quantile(bootstrap, [alpha, 1 - alpha], axis=0)
+
+    summary_records = []
+    for gene_index, gene in enumerate(info.genes):
+        for ratio_index, ratio_label in enumerate(ratio_labels):
+            numerator, denominator = ratio_definitions[ratio_label]
+            summary_records.append(
+                {
+                    gene_col: gene,
+                    "Ratio": ratio_label,
+                    "NumeratorMut": numerator,
+                    "DenominatorMut": denominator,
+                    "n_species": len(species),
+                    "estimate": float(estimates[gene_index, ratio_index]),
+                    "ci_low": float(lows[gene_index, ratio_index]),
+                    "ci_high": float(highs[gene_index, ratio_index]),
+                    "median": float(medians[gene_index, ratio_index]),
+                    "confidence": confidence,
+                }
+            )
+    summary = pd.DataFrame.from_records(summary_records)
+
+    pairwise_test_tables = []
+    for ratio_index, ratio_label in enumerate(ratio_labels):
+        pairwise_test_tables.append(
+            _paired_wilcoxon_tests(
+                values[:, :, ratio_index],
+                info.genes,
+                comparison_label=ratio_label,
+                comparison_col="Ratio",
+                alternative=pairwise_alternative,
+            )
+        )
+    pairwise_tests = pd.concat(pairwise_test_tables, ignore_index=True)
+
+    labels = {**DEFAULT_GENE_LABELS, **(gene_labels or {})}
+    colors = _resolve_palette(info.genes, palette)
+    n_panels = len(ratio_labels)
+    fig, axes = plt.subplots(
+        1,
+        n_panels,
+        figsize=(3.55 * n_panels + 0.15, 3.45),
+        squeeze=False,
+    )
+    flat_axes = axes.ravel()
+
+    for ratio_index, ratio_label in enumerate(ratio_labels):
+        ax = flat_axes[ratio_index]
+        ratio_matrix = values[:, :, ratio_index]
+        if log_y and np.any(ratio_matrix < 0):
+            raise ValueError(
+                f"Log-scaled ratio panel {ratio_label!r} contains negative values"
+            )
+        _draw_paired_boxplot(
+            ax,
+            ratio_matrix,
+            info.genes,
+            labels,
+            colors,
+            show_species_lines=show_species_lines,
+        )
+        _style_paired_axis(ax)
+        if log_y:
+            if np.any(ratio_matrix == 0):
+                positive_minimum = float(ratio_matrix[ratio_matrix > 0].min())
+                ax.set_yscale(
+                    "symlog",
+                    base=10,
+                    linthresh=positive_minimum / 2,
+                    linscale=0.45,
+                )
+                ax.set_ylim(bottom=0)
+                zero_panel_ticks = [
+                    tick
+                    for tick in (0, 0.1, 1, 10, 100, 1000)
+                    if tick == 0 or tick <= float(ratio_matrix.max()) * 1.25
+                ]
+                ax.set_yticks(zero_panel_ticks)
+            else:
+                ax.set_yscale("log")
+                ax.yaxis.set_major_locator(
+                    LogLocator(base=10, subs=(1.0, 2.0, 5.0))
+                )
+            ax.yaxis.set_major_formatter(FuncFormatter(_plain_log_tick))
+        ax.axhline(
+            1,
+            color="#9AA1AA",
+            linewidth=0.8,
+            linestyle=(0, (3, 3)),
+            zorder=0,
+        )
+        _annotate_pairwise_tests(
+            ax,
+            pairwise_tests.loc[pairwise_tests["Ratio"].eq(ratio_label)],
+            info.genes,
+            gene_labels=labels,
+        )
+        ax.set_ylabel(
+            "Within-species mutation ratio" if ratio_index == 0 else ""
+        )
+        ax.set_title(
+            f"{chr(65 + ratio_index)}   {ratio_label.replace('/', ' / ')}",
+            loc="left",
+            fontsize=10.5,
+            fontweight="bold",
+            pad=8,
+        )
+
+    fig.suptitle(
+        f"Within-species mutation ratios  ·  N = {len(species)} paired species",
+        x=0.065,
+        y=0.985,
+        ha="left",
+        fontsize=11.5,
+        fontweight="bold",
+    )
+    fig.subplots_adjust(left=0.09, right=0.99, bottom=0.14, top=0.82, wspace=0.27)
+    return SpectrumPlotResult(
+        fig,
+        axes if n_panels > 1 else flat_axes[0],
+        summary,
+        info.genes,
+        len(species),
+        pairwise_tests,
+    )
+
+
 def plot_tsss_ratio_gradient(
     data: pd.DataFrame,
     gene_metadata: pd.DataFrame,
@@ -1265,6 +1500,245 @@ def _ratio_value_array(
     )
 
 
+def _paired_wilcoxon_tests(
+    values: np.ndarray,
+    genes: Sequence[str],
+    *,
+    comparison_label: str,
+    comparison_col: str,
+    alternative: str = "two-sided",
+) -> pd.DataFrame:
+    """Run paired Wilcoxon tests with direction defined as Gene2 vs Gene1.
+
+    SciPy defines its alternative on ``x - y``. The public alternatives here
+    deliberately follow the more readable figure interpretation instead:
+    ``"greater"`` means Gene2 > Gene1, while ``"less"`` means Gene2 < Gene1.
+    """
+
+    if values.ndim != 2 or values.shape[1] != len(genes):
+        raise ValueError("values must have one column per gene")
+    if not np.isfinite(values).all():
+        raise ValueError("Paired-test values must be finite")
+    alternative = _normalise_pairwise_alternative(alternative)
+    scipy_alternative = {
+        "two-sided": "two-sided",
+        "greater": "less",
+        "less": "greater",
+    }[alternative]
+
+    records = []
+    for first_index, second_index in combinations(range(len(genes)), 2):
+        first_values = values[:, first_index]
+        second_values = values[:, second_index]
+        differences = second_values - first_values
+        if np.all(differences == 0):
+            statistic, p_value = 0.0, 1.0
+            p_value_underflow = False
+        else:
+            test = wilcoxon(
+                first_values,
+                second_values,
+                alternative=scipy_alternative,
+                zero_method="wilcox",
+                method="auto",
+            )
+            statistic = float(test.statistic)
+            raw_p_value = float(test.pvalue)
+            p_value_underflow = raw_p_value == 0.0
+            p_value = (
+                float(np.finfo(float).tiny) if p_value_underflow else raw_p_value
+            )
+        first_gene = genes[first_index]
+        second_gene = genes[second_index]
+        if alternative == "greater":
+            hypothesis = f"{second_gene} > {first_gene}"
+        elif alternative == "less":
+            hypothesis = f"{second_gene} < {first_gene}"
+        else:
+            hypothesis = f"{second_gene} != {first_gene}"
+        records.append(
+            {
+                comparison_col: comparison_label,
+                "Gene1": first_gene,
+                "Gene2": second_gene,
+                "n_species": values.shape[0],
+                "n_nonzero_pairs": int(np.count_nonzero(differences)),
+                "statistic": statistic,
+                "p_value": p_value,
+                "p_value_underflow": p_value_underflow,
+                "median_paired_difference": float(np.median(differences)),
+                "difference_definition": "Gene2 - Gene1",
+                "alternative": alternative,
+                "alternative_hypothesis": hypothesis,
+                "scipy_alternative_on_gene1_minus_gene2": scipy_alternative,
+                "test": (
+                    "Paired Wilcoxon signed-rank (two-sided)"
+                    if alternative == "two-sided"
+                    else "Paired Wilcoxon signed-rank (one-sided)"
+                ),
+            }
+        )
+
+    result = pd.DataFrame.from_records(records)
+    result["p_value_holm"] = _holm_adjust(result["p_value"].to_numpy(dtype=float))
+    result["p_value_holm_underflow"] = result["p_value_underflow"]
+    return result
+
+
+def _holm_adjust(p_values: np.ndarray) -> np.ndarray:
+    """Return Holm-adjusted p-values in their original order."""
+
+    order = np.argsort(p_values)
+    ordered = p_values[order]
+    adjusted_ordered = np.maximum.accumulate(
+        ordered * np.arange(len(ordered), 0, -1)
+    )
+    adjusted = np.empty_like(adjusted_ordered)
+    adjusted[order] = np.minimum(adjusted_ordered, 1.0)
+    return adjusted
+
+
+def _annotate_pairwise_tests(
+    ax: Axes,
+    tests: pd.DataFrame,
+    genes: Sequence[str],
+    *,
+    gene_labels: Mapping[str, str] | None = None,
+    y_position: float = 0.97,
+    stacked_single: bool = False,
+) -> None:
+    """Write a compact two-line paired-test result in the upper-right."""
+
+    if tests.empty:
+        return
+    # Keep the existing private-call signature for compatibility. Directional
+    # hypotheses remain in ``tests``; figures intentionally report only the
+    # test family, sidedness, and p-value.
+    _ = genes, gene_labels, stacked_single
+    multiple_tests = len(tests) > 1
+    alternatives = set(tests["alternative"])
+    sidedness = "two-sided" if alternatives == {"two-sided"} else "one-sided"
+    p_values = []
+    for _, row in tests.iterrows():
+        p_text = _format_p_value(
+            float(row["p_value_holm"]),
+            upper_bound=bool(row.get("p_value_holm_underflow", False)),
+        )
+        p_values.append(p_text)
+    p_label = "Holm p-values" if multiple_tests else "p-value"
+    lines = [
+        f"Paired Wilcoxon, {sidedness}",
+        f"{p_label} {', '.join(p_values)}",
+    ]
+
+    for line_number, line in enumerate(lines):
+        ax.text(
+            0.98,
+            y_position - 0.055 * line_number,
+            line,
+            transform=ax.transAxes,
+            ha="right",
+            va="top",
+            fontsize=8.0,
+            color=_PLOT_TEXT,
+            bbox={
+                "boxstyle": "square,pad=0.04",
+                "facecolor": "white",
+                "edgecolor": "none",
+                "alpha": 1.0,
+            },
+            zorder=10,
+        )
+
+
+def _format_p_value(p_value: float, *, upper_bound: bool = False) -> str:
+    if not np.isfinite(p_value) or not 0 <= p_value <= 1:
+        raise ValueError("p-value must be finite and lie between zero and one")
+    if p_value == 0:
+        upper_bound = True
+        p_value = float(np.finfo(float).tiny)
+    operator = "<" if upper_bound else "="
+    if p_value < 0.001:
+        return f"{operator} {p_value:.2e}"
+    return f"{operator} {p_value:.3f}"
+
+
+def _normalise_pairwise_alternative(alternative: str) -> str:
+    alternative = str(alternative).casefold().strip()
+    allowed = {"two-sided", "greater", "less"}
+    if alternative not in allowed:
+        raise ValueError(
+            "pairwise_alternative must be 'two-sided', 'greater', or 'less'"
+        )
+    return alternative
+
+
+def _draw_paired_boxplot(
+    ax: Axes,
+    values: np.ndarray,
+    genes: Sequence[str],
+    gene_labels: Mapping[str, str],
+    colors: Mapping[str, object],
+    *,
+    show_species_lines: bool,
+) -> None:
+    """Draw all matched trajectories behind compact, journal-style boxes."""
+
+    x = np.arange(len(genes), dtype=float)
+    if show_species_lines:
+        for species_values in values:
+            ax.plot(
+                x,
+                species_values,
+                color=_PAIRED_LINE,
+                alpha=0.075,
+                linewidth=0.45,
+                solid_capstyle="round",
+                zorder=1,
+            )
+    boxplot = ax.boxplot(
+        [values[:, index] for index in range(len(genes))],
+        positions=x,
+        widths=0.38,
+        whis=1.5,
+        patch_artist=True,
+        showfliers=False,
+        tick_labels=[gene_labels.get(gene, gene) for gene in genes],
+        boxprops={"linewidth": 1.0},
+        whiskerprops={"color": "#4B5563", "linewidth": 0.9},
+        capprops={"color": "#4B5563", "linewidth": 0.9},
+        medianprops={"color": _PLOT_TEXT, "linewidth": 1.5},
+        zorder=3,
+    )
+    for patch, gene in zip(boxplot["boxes"], genes):
+        patch.set_facecolor(to_rgba(colors[gene], 0.58))
+        patch.set_edgecolor(colors[gene])
+    ax.set_xlim(-0.52, len(genes) - 0.48)
+
+
+def _style_paired_axis(ax: Axes) -> None:
+    ax.set_facecolor("white")
+    ax.grid(False)
+    sns.despine(ax=ax, top=True, right=True)
+    for spine in ("left", "bottom"):
+        ax.spines[spine].set_color("#31363C")
+        ax.spines[spine].set_linewidth(0.8)
+    ax.tick_params(axis="x", length=0, pad=6, labelsize=8.5, colors=_PLOT_TEXT)
+    ax.tick_params(axis="y", length=3, width=0.8, labelsize=8, colors=_PLOT_TEXT)
+    ax.yaxis.label.set_color(_PLOT_TEXT)
+    ax.yaxis.label.set_size(9)
+
+
+def _plain_log_tick(value: float, _position: int) -> str:
+    if value == 0:
+        return "0"
+    if value < 0:
+        return ""
+    if value >= 1:
+        return f"{value:g}"
+    return f"{value:.2g}"
+
+
 def _normalise_genes(genes: Sequence[str]) -> tuple[str, ...]:
     ordered_genes = tuple(genes)
     if not 2 <= len(ordered_genes) <= 5:
@@ -1350,7 +1824,15 @@ def _resolve_palette(
     palette: Mapping[str, object] | Sequence[object] | None,
 ) -> dict[str, object]:
     if palette is None:
-        return dict(zip(genes, sns.color_palette("colorblind", len(genes))))
+        resolved: dict[str, object] = {}
+        fallback_index = 0
+        for gene in genes:
+            if gene in DEFAULT_GENE_COLORS:
+                resolved[gene] = DEFAULT_GENE_COLORS[gene]
+            else:
+                resolved[gene] = _OKABE_ITO[fallback_index % len(_OKABE_ITO)]
+                fallback_index += 1
+        return resolved
     if isinstance(palette, Mapping):
         missing = [gene for gene in genes if gene not in palette]
         if missing:
@@ -1393,6 +1875,7 @@ def _validate_gene_metadata(
 
 
 __all__ = [
+    "DEFAULT_GENE_COLORS",
     "DEFAULT_GENE_LABELS",
     "DEFAULT_MUTATION_RATIOS",
     "MatchedSpectrumInfo",
@@ -1402,6 +1885,7 @@ __all__ = [
     "complement_substitution",
     "orient_substitutions_to_heavy_strand",
     "plot_matched_spectra",
+    "plot_mutation_ratio_comparison",
     "plot_mutation_comparison",
     "plot_tsss_gradient",
     "plot_tsss_ratio_gradient",

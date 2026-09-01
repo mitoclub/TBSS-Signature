@@ -1,0 +1,2 @@
+Mut,Gene1,Gene2,n_species,n_nonzero_pairs,statistic,p_value,p_value_underflow,median_paired_difference,difference_definition,alternative,alternative_hypothesis,scipy_alternative_on_gene1_minus_gene2,test,p_value_holm,p_value_holm_underflow
+C>T,CO1,Cytb,104,104,1795.0,0.001214595655893881,False,0.04366938492196487,Gene2 - Gene1,greater,Cytb > CO1,less,Paired Wilcoxon signed-rank (one-sided),0.001214595655893881,False

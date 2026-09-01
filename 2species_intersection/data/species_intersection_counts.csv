@@ -1,12 +1,12 @@
 taxonomic_scope,source_file,combination_size,genes,n_common_species,n_union_species,jaccard_index
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,89,230,0.3869565217391304
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,178,1725,0.10318840579710145
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,130,926,0.14038876889848811
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,100,1710,0.05847953216374269
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,94,869,0.10817031070195628
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,249,2298,0.10835509138381201
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,85,1734,0.049019607843137254
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,84,940,0.08936170212765958
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,122,2318,0.05263157894736842
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,91,2308,0.039428076256499134
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,82,2326,0.0352536543422184
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO1 + CO3,53,130,0.4076923076923077
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO1 + Cytb,104,799,0.13016270337922403
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO1 + ND2,75,163,0.4601226993865031
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO3 + Cytb,62,800,0.0775
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,2,CO3 + ND2,57,140,0.40714285714285714
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,2,Cytb + ND2,100,817,0.12239902080783353
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + Cytb,52,807,0.0644361833952912
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO1 + CO3 + ND2,51,175,0.2914285714285714
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO1 + Cytb + ND2,71,821,0.08647990255785627
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,3,CO3 + Cytb + ND2,55,824,0.06674757281553398
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,4,CO1 + CO3 + Cytb + ND2,50,828,0.06038647342995169

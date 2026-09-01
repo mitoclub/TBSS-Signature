@@ -1,4 +1,4 @@
 comparison,data_labels,n_common_vertebrates,status,selected
 COX3 / ND6,CO3 / ND6,,ND6 spectrum is absent,False
-COX1 / CytB,CO1 / Cytb,178.0,Available requested comparison,True
-COX3 / ND2,CO3 / ND2,94.0,Diagnostic only; ND2 is not ND6,False
+COX1 / CytB,CO1 / Cytb,104.0,Available requested comparison,True
+COX3 / ND2,CO3 / ND2,57.0,Diagnostic only; ND2 is not ND6,False

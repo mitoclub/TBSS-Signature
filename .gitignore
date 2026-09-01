@@ -214,3 +214,12 @@ __marimo__/
 # Stage 6 local sequence and Python caches
 /6amino_acid_shift/data/midori/
 /6amino_acid_shift/__pycache__/
+
+# Stage 5 signature-assignment environments, caches and intermediate files
+/5context192/signatures/.venv/
+/5context192/signatures/.Rlib/
+/5context192/signatures/work/
+/5context192/signatures/input/
+/5context192/signatures/reference/
+/5context192/signatures/results/
+/5context192/signatures/figures/

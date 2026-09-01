@@ -17,8 +17,9 @@ later stages read them but do not modify them.
 - `data/info.csv` contains supporting sample metadata.
 
 The source table contains five values in its `Class` column: `Actinopteri`,
-`Amphibia`, `Aves`, `Lepidosauria`, and `Mammalia`. Downstream notebooks include
-all five by default; stages 2--4 provide an optional single-class filter.
+`Amphibia`, `Aves`, `Lepidosauria`, and `Mammalia`. The source files are retained
+unchanged, but every current analysis notebook filters them to `Mammalia` before
+forming cohorts or calculating summaries.
 
 The downstream 12-component workflow expects at least the columns `Gene`,
 `Class`, `Species`, `Mut`, and `MutSpec`. A usable gene/species profile must have
@@ -29,8 +30,8 @@ weights, and a spectrum that sums to one.
 
 `Check192spec.ipynb` is a compact exploratory quality-control notebook retained
 from the initial analysis. Despite its historical name, its current input is
-the 12-component table. It inspects available genes and spectra and provides
-quick visual checks.
+the 12-component table. It filters to `Mammalia`, inspects available genes and
+spectra, and provides quick visual checks.
 
 Open and run the notebook from either the repository root or this folder:
 

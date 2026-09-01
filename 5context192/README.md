@@ -7,9 +7,9 @@ transitions (`C>T`, `A>G`, `G>A`, and `T>C`) changes across the matched
 `CO1`--`CO3`--`Cytb` gene series. It also provides a compact quality-control
 view of the complete 192-component spectra.
 
-The default scope is all vertebrate classes present in the source table. The
-exact intersection contains 85 species with a complete spectrum for every one
-of the three genes; comparisons are therefore within the same species cohort.
+The current scope is `Mammalia`. The exact intersection contains 52 species
+with a complete spectrum for every one of the three genes; comparisons are
+therefore within the same species cohort.
 
 ## Inputs
 
@@ -85,7 +85,7 @@ values, and sums to one.
 
 The notebook:
 
-1. selects and saves the exact 85-species, three-gene cohort;
+1. filters to `Mammalia` and saves the exact 52-species, three-gene cohort;
 2. validates the raw profiles, reverse-complements contexts once, and records
    the opportunity/observation QC states;
 3. plots the mean complete spectra for all three genes as three aligned
@@ -95,8 +95,7 @@ The notebook:
 5. estimates matched-species context slopes for both whole-spectrum weights
    and within-substitution shares along the same fixed human-rCRS DssH proxy
    used in stage 4; and
-6. repeats the whole-spectrum slope summary with equal class weighting and
-   reports an Expected-positive observed/expected sensitivity analysis.
+6. reports an Expected-positive observed/expected sensitivity analysis.
 
 For complete spectra, bootstrap intervals resample matched species as whole
 profiles: one draw is reused across all three genes and all 192 components in
@@ -127,9 +126,7 @@ The `data/` folder contains:
 - `transition_context_share_summary.csv`: within-substitution context shares;
 - `transition_context_oe_sensitivity.csv`: `Observed / Expected` summaries
   restricted to `Expected > 0`;
-- `context_tsss_slopes_species_weighted.csv` and
-  `context_tsss_slopes_equal_class.csv`: pooled and class-balanced context
-  gradients;
+- `context_tsss_slopes_species_weighted.csv`: mammalian context gradients;
 - `context_tsss_slopes_within_substitution_share.csv`: gradients after
   conditioning on the total weight of each central substitution; and
 - `context_tsss_slope_sensitivity.csv`: the three views side by side.
@@ -142,14 +139,25 @@ The `figures/` folder contains:
 - `transition_context_share_heatmaps.png`; and
 - `transition_context_tsss_slopes.png`.
 
+## COSMIC signature assignment substage
+
+The [`signatures/`](signatures/) subfolder applies the reference
+`4signatures` workflow to each of the three mean matched-gene spectra with two
+independent implementations: SigProfilerAssignment in Python and mSigAct in R.
+The strand-specific SBS192 profiles are converted to canonical SBS96 only at
+the COSMIC fitting boundary. It prepares the same high-transition,
+low-transition, and positive high-minus-low variants, with and without
+transversions, and retains all 18 gene/variant assignments. See the subfolder
+README for exact priors, exclusions, versions, outputs, and interpretation
+limits.
+
 ## Interpretation limits
 
 - The x-axis uses fixed human rCRS gene coordinates and OriL for every sampled
   vertebrate. It is a positional proxy, not species-specific time spent
   single-stranded.
-- The 85-species cohort is class-imbalanced (52 mammals, 19 actinopterygians,
-  8 birds, 4 amphibians, and 2 lepidosaurs). Equal-class weighting is shown as
-  a sensitivity analysis but does not solve phylogenetic non-independence.
+- The 52 mammalian species remain phylogenetically non-independent and unevenly
+  distributed among mammalian clades.
 - Only three genes define each slope, so gene identity, sequence composition,
   selection, position, and replication exposure remain confounded.
 - `MutSpec` is compositional. A higher component weight can reflect change in

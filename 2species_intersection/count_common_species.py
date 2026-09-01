@@ -4,11 +4,10 @@ The script uses the ready 12-component mutation spectra rather than raw sequence
 metadata.  This matters because a species can have a sequence for a gene while
 still lacking a mutation spectrum that can be used in the downstream comparison.
 
-By default, inclusive intersections are calculated across all vertebrate classes
-present in the input.  An exact value from the ``Class`` column can optionally be
-selected with ``--taxonomic-class``.  "Inclusive" means that a species shared by
-four genes is also counted in each relevant pair and triple.  This is the sample
-size needed when a particular combination is analysed.
+By default, inclusive intersections are calculated for ``Mammalia`` only.
+"Inclusive" means that a species shared by four genes is also counted in each
+relevant pair and triple.  This is the sample size needed when a particular
+combination is analysed.
 """
 
 from __future__ import annotations
@@ -46,12 +45,12 @@ EXPECTED_MUTATIONS = frozenset(
         "T>G",
     }
 )
-ALL_VERTEBRATES_LABEL = "All vertebrates"
+DEFAULT_TAXONOMIC_CLASS = "Mammalia"
 
 
 def load_gene_species_profiles(
     input_path: Path,
-    taxonomic_class: str | None = None,
+    taxonomic_class: str | None = DEFAULT_TAXONOMIC_CLASS,
 ) -> pd.DataFrame:
     """Return one row per gene/species profile in the requested scope.
 
@@ -122,7 +121,7 @@ def load_gene_species_profiles(
 
     # A spectrum contains one row per mutation type.  Dropping duplicates here
     # reduces it to the presence/absence table needed for set intersections.
-    # Class is retained so pooled vertebrate cohorts remain auditable.
+    # Class is retained so the Mammalia-only scope remains auditable.
     return (
         selected_spectra[["Gene", "Species", "Class"]]
         .drop_duplicates()
@@ -248,10 +247,10 @@ def parse_args(args: Iterable[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--taxonomic-class",
-        default=None,
+        default=DEFAULT_TAXONOMIC_CLASS,
         help=(
-            "Optional exact value from the Class column. "
-            "Omit to analyse all vertebrate classes."
+            "Exact value from the Class column "
+            f"(default: {DEFAULT_TAXONOMIC_CLASS})."
         ),
     )
     parser.add_argument(
@@ -308,11 +307,7 @@ def main(args: Iterable[str] | None = None) -> None:
         source_label = str(input_path.relative_to(PROJECT_ROOT))
     except ValueError:
         source_label = str(input_path)
-    scope_label = (
-        options.taxonomic_class.strip()
-        if options.taxonomic_class is not None
-        else ALL_VERTEBRATES_LABEL
-    )
+    scope_label = options.taxonomic_class.strip()
     for table in (gene_summary, intersection_counts, intersection_members):
         table.insert(0, "source_file", source_label)
         table.insert(0, "taxonomic_scope", scope_label)

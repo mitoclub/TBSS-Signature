@@ -1,136 +1,151 @@
-# 6. MIDORI2 sequences and amino-acid shift
+# 6. MIDORI2 amino-acid ratios along the Major Arc
 
 ## Purpose
 
-This stage links the exact Mammalia mutation-spectrum intersection for `CO1`,
-`CO3`, and `Cytb` to real mitochondrial coding sequences from MIDORI2. It then
-uses the matched CDS/protein data for observed amino-acid composition,
-real-codon opportunities for `A_H>G_H` and `C_H>T_H`, mutation-spectrum
-weighting, and an exploratory predicted-versus-observed comparison.
+This stage compares two amino-acid count ratios across ten mammalian
+mitochondrial protein-coding genes in Major Arc order:
 
-MIDORI2 is the only sequence backend used by this stage.
+`COX1 → COX2 → ATP8 → ATP6 → COX3 → ND3 → ND4L → ND4 → ND5 → CytB`.
 
-## Source release and local cache
+The ratios are:
 
-The current analysis uses MIDORI2 release `GenBank272_2026-06-07` (`GB272`):
+- `(Asn + Lys) / Gly`;
+- `Pro / (Phe + Leu[TTA/TTG])`, where only leucines encoded by `TTA` or `TTG`
+  enter the denominator.
 
-- nucleotide: `RAW/uniq/MIDORI2_UNIQ_NUC_GB272_{gene}_RAW.fasta.gz`;
-- protein: `RAW_AA/total/MIDORI2_TOTAL_AA_GB272_{gene}_RAW_AA.fasta.gz`;
-- `{gene}` is `CO1`, `CO3`, or `Cytb`.
+The less specific `Pro/Phe` ratio is no longer calculated. ND1 and ND2 are
+outside the Major Arc definition used by the project. ND6 lies physically in
+the arc but is excluded because it is encoded on the opposite, light strand.
+MIDORI names ATP6 and ATP8 `A6` and `A8`; the notebook uses their familiar
+display names.
 
-The six archives are cached under `data/midori/`. Their exact official URL,
-compressed size, and SHA-256 checksum are written to
-`data/derived_midori/midori_file_manifest.csv`. The analysis never downloads
-or replaces these files automatically.
+Species are discovered directly in MIDORI2. There is no MutSpec intersection,
+mutation-spectrum weighting, or GenBank retrieval code.
 
-The MIDORI website currently presents an expired TLS certificate. The cached
-files were downloaded from the exact paths listed on its official download
-page, and local hashes are recorded for repeatability. A local hash detects a
-changed cache file but cannot retrospectively authenticate a download made
-while TLS verification was unavailable.
+## MIDORI2 input and cohort
 
-Biopython is used here only for resolving merged/current NCBI TaxIDs when the
-taxonomy cache is absent. It is not used to retrieve the nucleotide or protein
-sequences.
+The cache uses MIDORI2 `GenBank272_2026-06-07` (`GB272`) and contains one
+`UNIQ_NUC` plus one `TOTAL_AA` archive for each of the ten genes: 20 archives in
+total. The large archives live in `data/midori/`, are excluded from Git, and are
+not replaced automatically. Their official URLs, sizes, SHA-256 hashes, and
+scan counts are stored in `data/derived_midori/midori_file_manifest.csv`.
 
-## Why UNIQ_NUC plus TOTAL_AA
+The backend scans only records annotated as `Mammalia` (TaxID 40674). TaxID is
+the taxon key; species names are labels. A protein is paired with a CDS only
+when accession and coordinates match exactly. Candidate selection is
+deterministic and is completed before any ratio is calculated.
 
-MIDORI's `LONGEST_NUC` and `LONGEST_AA` products choose one record per species
-independently. In a strict trial, most selected nucleotide loci therefore did
-not share an accession-coordinate identifier with the selected protein. In
-addition, “longest” records sometimes contained many ambiguous bases.
+A selected record must be full-length, in frame, nearly unambiguous, free of
+internal stops, and reproduce its paired protein under vertebrate mitochondrial
+translation table 2. The final analytical cohort requires a QC-passing record
+for every target gene, retaining a strictly paired comparison:
 
-The implemented route instead scans `UNIQ_NUC` candidates and looks up the
-protein in `TOTAL_AA`. A protein is accepted only when its FASTA identifier
-starts with the complete nucleotide identifier:
+- 1,932 mammalian species;
+- 19,320 `species × gene` sequence records.
+
+The MIDORI `UNIQ_NUC` representatives are not a strict RefSeq-only collection.
+
+## Counts, zeros, and ratios
+
+P, F, N, K, and G are counted in the validated protein. `Leu[TTA/TTG]` is
+counted from the matched CDS because synonymous codons cannot be reconstructed
+from a protein sequence. Dividing numerator and denominator by the same gene
+length would cancel, so no additional length normalization is used.
+
+Short genes make zero counts important: 1,819 of 1,932 ATP8 records contain no
+glycine, and seven ND4L records contain no proline. Raw counts and raw ratios
+where defined remain available in notebook memory. Tests, fold changes, and
+figures use the explicitly documented continuity correction
 
 ```text
-accession.version.start.end_protein_accession.version
+corrected ratio = (numerator + 0.5) / (denominator + 0.5)
 ```
 
-Thus a protein from the same species but a different nucleotide locus is never
-substituted. `translate(CDS)` is checked against the paired MIDORI protein
-under vertebrate mitochondrial translation table 2.
+This keeps zero-count observations instead of silently deleting most ATP8
+measurements. No analytical CSV tables are generated.
 
-## Taxonomy and deterministic selection
+## Statistical comparison
 
-Repository species identifiers are converted from underscores to spaces.
-Only whitespace and case are normalized. Subspecies, strain, `cf.`, `aff.`,
-and `sp.` tokens are not removed. A record must match the exact scientific
-name or an NCBI-resolved TaxID; ambiguous/fuzzy matching is not used.
+All ten gene measurements are linked within species. For each ratio the
+notebook therefore uses:
 
-For each species, all MIDORI2 candidates are retained in
-`midori_sequence_manifest.csv`. Selection follows:
+1. a Friedman repeated-measures test for any difference among the ten genes;
+2. Kendall's `W` as the omnibus effect size;
+3. a one-sided Page trend test for an overall increase along the predefined
+   Major Arc order;
+4. all 45 forward pairwise comparisons, tested as `later > earlier` with
+   one-sided paired Wilcoxon signed-rank tests on log2 corrected ratios;
+5. Holm correction across the 45 post-hoc tests within each ratio.
 
-1. require an exact nucleotide-locus/protein pair;
-2. require exact translation, a non-partial CDS, at most 1% ambiguous bases,
-   no internal stop, a valid frame or terminal `T`/`TA` incomplete stop, and a
-   plausible gene-specific protein length;
-3. prefer one accession that supplies basic-valid CO1, CO3, and Cytb pairs;
-4. prefer a RefSeq-style accession, fewer ambiguous bases, then a lexical
-   identifier as deterministic tie-breaks;
-5. if no valid shared accession exists, select the best candidate per gene and
-   retain the fallback status in the audit tables.
+The nine adjacent pairs and the `CytB / COX1` endpoint are marked as planned,
+but all 45 comparisons are calculated. Nothing is selected post hoc because it
+looks especially strong. ATP8/ATP6 and ND4L/ND4 overlap in physical coordinates,
+so the ordered test describes a broad positional trend rather than ten equally
+spaced independent exposure steps.
 
-`UNIQ_NUC` collapses identical nucleotide haplotypes, so a shared accession can
-only be selected when that accession remains represented. The analysis reports
-`same_accession_all_three` rather than assuming it.
+## Figures
 
-MIDORI FASTA sequences are already emitted in coding orientation. The stored
-`coding_strand=1` refers to that supplied sequence orientation; the original
-genomic feature strand is not present in MIDORI RAW FASTA.
+The notebook produces two figures as PNG and editable PDF:
 
-## Execution
+1. `figures/amino_acid_ratios_by_gene.*` — two vertically aligned
+   violin/boxplot panels across all ten genes. Faint lines retain every
+   within-species trajectory; dots and the dark line show medians. The y-axis is
+   logarithmic. As requested, each panel contains only the one-sided paired
+   Wilcoxon p-value for the pre-specified `CytB > COX1` endpoint.
+2. `figures/paired_ratio_fold_changes.*` — two upper-triangular matrices showing
+   the median within-species fold change for every one of the 45 forward gene
+   pairs. Adjacent comparisons are outlined, and `CytB / COX1` has a gold
+   outline. This avoids both an unreadable 90-row forest plot and post-hoc
+   selection of only the largest effects. P-values are not drawn in this figure.
 
-From the repository root:
+There are no plots of species counts, availability, or attrition.
+
+## Current result
+
+Both ratios differ strongly among genes (`Friedman p < 10^-300`), with
+Kendall's `W = 0.927` for `(Asn+Lys)/Gly` and `W = 0.830` for the
+proline-based ratio.
+
+The broad ordered Page trend is supported for `(Asn+Lys)/Gly`
+(`Holm p = 2.13 × 10^-87`) but not for `Pro/(Phe+Leu[TTA/TTG])` (`p = 1`).
+Neither ratio follows a strict step-by-step increase because several adjacent
+contrasts decrease. Nevertheless, the pre-specified CytB endpoint is above
+COX1 for both ratios:
+
+| Ratio | Median CytB/COX1 fold change | Species with increase |
+|---|---:|---:|
+| `(Asn+Lys)/Gly` | 1.863× | 100.0% |
+| `Pro/(Phe+Leu[TTA/TTG])` | 1.249× | 95.4% |
+
+These are sample-level paired results, not phylogenetically corrected inference.
+
+## Minimal outputs
+
+The extraction backend writes only:
+
+- `data/derived_midori/midori_file_manifest.csv`;
+- `data/derived_midori/midori_gene_sequences.csv.gz`.
+
+Counts, ratios, omnibus tests, all 90 ratio-specific post-hoc rows, and effect
+matrices exist as in-memory DataFrames inside `AminoAcidShift.ipynb`.
+
+## Execution and verification
+
+Refresh extraction and QC after changing the cached archives:
 
 ```powershell
 py -3 6amino_acid_shift/run_analysis.py
 ```
 
-Use `--bootstrap 2000` (the default) for final species-cluster bootstrap
-intervals. The analysis is intentionally restricted to Mammalia because its QC
-and codon-consequence calculations use vertebrate mitochondrial translation
-table 2.
+Run `AminoAcidShift.ipynb` from the repository root or stage directory, then:
 
-## Current cohort result
+```powershell
+py -3 6amino_acid_shift/verify_midori.py
+```
 
-For the Mammalia mutation-spectrum input:
+## Interpretation limit
 
-- mutation spectra for all three genes: 52 species;
-- reliable MIDORI2 sequences for all three genes: 52 species;
-- all three genes passed strict sequence QC: 51 species;
-- 50 species used one shared accession for all three genes;
-- `Ochotona_cansus` passed using a documented gene-specific fallback;
-- `Cricetulus_kamensis` was excluded because every available CO3 candidate was
-  marked partial at the 3′ boundary.
-
-The exact counts are generated programmatically; they are not used as analysis
-constants.
-
-## Outputs
-
-MIDORI2 outputs are isolated under `data/derived_midori/`:
-
-- `midori_file_manifest.csv`: release, URL, size, hash, and scan counts;
-- `midori_sequence_manifest.csv`: every candidate, QC prerequisites, rank,
-  selected flag, and selection reason;
-- `species_midori_matching.csv`: exact/TaxID-confirmed species matching;
-- `midori_record_consistency.csv`: three accessions and shared-record status;
-- `midori_gene_sequences.csv.gz`: canonical selected CDS/protein table;
-- `sequence_qc.csv`;
-- `species_gene_availability.csv`;
-- `species_intersection_summary.csv`;
-- `species_exclusion_reasons.csv` and `exclusion_reason_summary.csv`;
-- `final_common_species.csv`;
-- observed composition, codon-opportunity, mutation-weighted shift, bootstrap,
-  contrast, and Spearman tables.
-
-The figure is written to `figures/midori/`:
-
-- `main_amino_acid_shift.png`.
-
-All confidence intervals resample species as matched clusters. The association
-between predicted and observed amino-acid changes is exploratory: gene
-identity, selection, phylogeny, base composition, and the gene-order/DssH proxy
-remain confounded, so it is not evidence of causality.
+The sample is uneven across mammalian clades, and species are not
+phylogenetically independent. Effect sizes and consistency across paired species
+are therefore emphasized over extremely small p-values. A phylogenetic or
+genus-balanced sensitivity analysis would be a separate extension.

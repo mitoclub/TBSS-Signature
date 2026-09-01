@@ -1,0 +1,5 @@
+SigProfilerAssignment==1.1.5
+matplotlib==3.10.8
+numpy==2.5.2
+pandas==2.3.3
+scipy==1.18.1

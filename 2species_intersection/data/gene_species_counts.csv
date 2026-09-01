@@ -1,5 +1,5 @@
 taxonomic_scope,source_file,gene,n_species
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,Cytb,1697
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,ND2,850
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,CO1,206
-All vertebrates,1init_data\data\MutSpecVertebrates12.csv.gz,CO3,113
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,Cytb,791
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,ND2,126
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,CO1,112
+Mammalia,1init_data\data\MutSpecVertebrates12.csv.gz,CO3,71

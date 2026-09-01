@@ -1,6 +1,0 @@
-stage,n_species,n_excluded,reason
-mutation-spectrum cohort,52,0,"complete spectra for CO1, CO3 and Cytb"
-MIDORI2 matched,52,0,not found or unsafe taxonomic match
-all 3 genes found,52,0,one or more target CDS absent
-sequence QC,51,1,one or more target CDS failed sequence QC
-final analysis cohort,51,0,complete matched analysis input

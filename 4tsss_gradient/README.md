@@ -15,12 +15,10 @@ description of a proposed single-stranded-duration gradient.
 - Reusable validation, orientation, plotting, and bootstrap functions:
   `../3compare_t_genes/mutation_comparison.py`.
 
-The current analysis uses the exact shared cohort for `CO1`, `CO3`, and `Cytb`
-across all represented vertebrate classes. It contains 85 species and examines
-`C>T`, `A>G`, `G>A`, and `T>C` after orienting substitutions to heavy-strand
-notation. Set `CLASS_FILTER` in the notebook to one source label, for example
-`"Mammalia"`, for a single-class analysis; leave it as `None` for the default
-all-class scope.
+The current analysis uses the exact mammalian shared cohort for `CO1`, `CO3`,
+and `Cytb`. It contains 52 species and examines `C>T`, `A>G`, `G>A`, and `T>C`
+after orienting substitutions to heavy-strand notation. `CLASS_FILTER` is fixed
+to `"Mammalia"` for the current project.
 
 ## TSSS proxy
 
@@ -113,13 +111,8 @@ The `figures/` folder contains:
 
 - The proxy is derived from fixed human rCRS coordinates and is not a
   species-specific replication-timing measurement. Applying the same human
-  coordinates to fishes, amphibians, birds, lepidosaurs, and mammals is a strong
-  simplifying assumption; differences in genome organisation and replication
-  biology are not represented.
-- The pooled 85-species cohort is strongly class-imbalanced: 52 `Mammalia`, 19
-  `Actinopteri`, 8 `Aves`, 4 `Amphibia`, and 2 `Lepidosauria`. Consequently, a
-  pooled trend can be driven by the supplied class composition and cannot be
-  interpreted as a class-balanced vertebrate gradient.
+  coordinates to all sampled mammals is still a simplifying assumption;
+  differences in mitogenome organisation are not represented.
 - With only three genes, slope estimates cannot separate TSSS from gene
   identity, base composition, selection, or other genomic factors.
 - Removing the 100% normalization avoids compositional closure but does not turn
