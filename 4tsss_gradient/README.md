@@ -22,14 +22,20 @@ to `"Mammalia"` for the current project.
 
 ## TSSS proxy
 
-`TSSSMutationGradient.ipynb` records rCRS start and end positions for the three
-genes, calculates each midpoint, and uses
+`TSSSMutationGradient.ipynb` takes rCRS start and end positions from the shared
+canonical table in [`../mtdna.py`](../mtdna.py) rather than repeating them, and
+uses
 
 ```text
 DssH proxy = 2 * (gene midpoint - OriL start) / mtDNA length
 ```
 
-with an mtDNA length of 16,569 bp and an OriL start of 5,730. The explicit
+with an mtDNA length of 16,569 bp and an OriL start of 5,730. `GENES` is passed
+through `canonical_order`, so the gene axis is always in rCRS order whatever
+order the notebook lists. The proxy is linear and not wrapped around the
+circular genome, so it is defined only downstream of OriL: it exceeds one for
+CytB and would be negative for ND1 and ND2, which is why those genes are not
+placed on this gradient. The explicit
 numeric metadata are saved with the results; gene order alone is never used as
 the explanatory variable. These are fixed human rCRS coordinates applied as a
 common positional scale, not observed single-stranded durations for the sampled

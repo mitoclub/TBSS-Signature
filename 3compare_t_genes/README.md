@@ -50,8 +50,10 @@ Means and uncertainty intervals are calculated by resampling whole species, so
 the matched relationship between genes and mutation components is preserved.
 
 To analyse another combination, change `GENES` in `CompareTGenes.ipynb` to any
-two to five available genes. The notebook will regenerate filenames from that
-selection. `CLASS_FILTER` remains fixed to `"Mammalia"` for the current project.
+two to five available genes. The list is passed through `canonical_order` from
+[`../mtdna.py`](../mtdna.py), so the genes are always plotted and tested in
+canonical rCRS order and an unknown gene key raises immediately. The notebook
+will regenerate filenames from that selection. `CLASS_FILTER` remains fixed to `"Mammalia"` for the current project.
 
 ## Reusable functions
 

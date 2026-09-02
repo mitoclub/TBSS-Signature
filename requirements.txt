@@ -1,0 +1,24 @@
+# Python environment for stages 1-6 (notebooks, stage modules, verifiers).
+#
+# Tested with CPython 3.12 and 3.14 on Windows 11; the code is platform
+# independent and uses no Windows-only APIs.
+#
+#     python -m venv .venv
+#     .venv/Scripts/activate        # Windows
+#     source .venv/bin/activate     # Linux and macOS
+#     python -m pip install -r requirements.txt
+#
+# The COSMIC signature substage in 5context192/signatures/ has its own,
+# deliberately separate environment; see 5context192/signatures/requirements.txt.
+
+matplotlib==3.10.8
+numpy==2.3.5
+pandas==2.3.3
+pillow==12.1.0
+scipy==1.17.0
+seaborn==0.13.2
+
+# Running the .ipynb files also needs a Jupyter front end, for example
+# `python -m pip install jupyterlab`.
+ipykernel==7.1.0
+ipython==9.9.0

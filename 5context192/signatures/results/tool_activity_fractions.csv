@@ -1,0 +1,124 @@
+Activity,Branch,Gene,Signature,SpectrumType,Tool,ActivityFraction
+3,low_Ts,CO1,SBS1,Ts_only,SigProfilerAssignment,0.005535055350553505
+4,low_Ts,Cytb,SBS1,Ts_only,SigProfilerAssignment,0.011527377521613832
+1,low_Ts,CO1,SBS1,Ts_and_Tv,SigProfilerAssignment,0.0016750418760469012
+2,low_Ts,Cytb,SBS1,Ts_and_Tv,SigProfilerAssignment,0.005025125628140704
+88,low_Ts,CO1,SBS5,Ts_only,SigProfilerAssignment,0.16236162361623616
+36,low_Ts,Cytb,SBS5,Ts_only,SigProfilerAssignment,0.1037463976945245
+160,low_Ts,CO1,SBS5,Ts_and_Tv,SigProfilerAssignment,0.26800670016750416
+57,low_Ts,CO3,SBS5,Ts_and_Tv,SigProfilerAssignment,0.0976027397260274
+105,low_Ts,Cytb,SBS5,Ts_and_Tv,SigProfilerAssignment,0.2638190954773869
+190,low_Ts,CO1,SBS12,Ts_only,SigProfilerAssignment,0.3505535055350554
+223,low_Ts,CO3,SBS12,Ts_only,SigProfilerAssignment,0.4215500945179584
+143,low_Ts,Cytb,SBS12,Ts_only,SigProfilerAssignment,0.41210374639769454
+177,low_Ts,CO1,SBS12,Ts_and_Tv,SigProfilerAssignment,0.2964824120603015
+218,low_Ts,CO3,SBS12,Ts_and_Tv,SigProfilerAssignment,0.3732876712328767
+131,low_Ts,Cytb,SBS12,Ts_and_Tv,SigProfilerAssignment,0.32914572864321606
+261,low_Ts,CO1,SBS30,Ts_only,SigProfilerAssignment,0.48154981549815495
+222,low_Ts,CO3,SBS30,Ts_only,SigProfilerAssignment,0.41965973534971646
+164,low_Ts,Cytb,SBS30,Ts_only,SigProfilerAssignment,0.47262247838616717
+259,low_Ts,CO1,SBS30,Ts_and_Tv,SigProfilerAssignment,0.4338358458961474
+224,low_Ts,CO3,SBS30,Ts_and_Tv,SigProfilerAssignment,0.3835616438356164
+160,low_Ts,Cytb,SBS30,Ts_and_Tv,SigProfilerAssignment,0.4020100502512563
+84,low_Ts,CO3,SBS44,Ts_only,SigProfilerAssignment,0.15879017013232513
+85,low_Ts,CO3,SBS44,Ts_and_Tv,SigProfilerAssignment,0.14554794520547945
+11,high_Ts,CO1,SBS1,Ts_only,SigProfilerAssignment,0.010367577756833177
+14,high_Ts,CO1,SBS1,Ts_and_Tv,SigProfilerAssignment,0.012544802867383513
+36,high_Ts,CO1,SBS5,Ts_only,SigProfilerAssignment,0.033930254476908575
+60,high_Ts,CO3,SBS5,Ts_only,SigProfilerAssignment,0.04866180048661801
+105,high_Ts,Cytb,SBS5,Ts_only,SigProfilerAssignment,0.07841672890216579
+119,high_Ts,CO3,SBS5,Ts_and_Tv,SigProfilerAssignment,0.09239130434782608
+169,high_Ts,Cytb,SBS5,Ts_and_Tv,SigProfilerAssignment,0.12158273381294964
+443,high_Ts,CO1,SBS12,Ts_only,SigProfilerAssignment,0.4175306314797361
+582,high_Ts,CO3,SBS12,Ts_only,SigProfilerAssignment,0.4720194647201946
+622,high_Ts,Cytb,SBS12,Ts_only,SigProfilerAssignment,0.46452576549663926
+436,high_Ts,CO1,SBS12,Ts_and_Tv,SigProfilerAssignment,0.3906810035842294
+576,high_Ts,CO3,SBS12,Ts_and_Tv,SigProfilerAssignment,0.4472049689440994
+612,high_Ts,Cytb,SBS12,Ts_and_Tv,SigProfilerAssignment,0.44028776978417267
+188,high_Ts,CO3,SBS19,Ts_only,SigProfilerAssignment,0.15247364152473641
+190,high_Ts,CO3,SBS19,Ts_and_Tv,SigProfilerAssignment,0.14751552795031056
+147,high_Ts,CO1,SBS23,Ts_only,SigProfilerAssignment,0.13854853911404336
+424,high_Ts,CO1,SBS30,Ts_only,SigProfilerAssignment,0.3996229971724788
+403,high_Ts,CO3,SBS30,Ts_only,SigProfilerAssignment,0.32684509326845096
+612,high_Ts,Cytb,SBS30,Ts_only,SigProfilerAssignment,0.4570575056011949
+470,high_Ts,CO1,SBS30,Ts_and_Tv,SigProfilerAssignment,0.4211469534050179
+403,high_Ts,CO3,SBS30,Ts_and_Tv,SigProfilerAssignment,0.31288819875776397
+609,high_Ts,Cytb,SBS30,Ts_and_Tv,SigProfilerAssignment,0.4381294964028777
+196,high_Ts,CO1,SBS42,Ts_and_Tv,SigProfilerAssignment,0.17562724014336917
+9,high_minus_low_Ts,CO1,SBS1,Ts_only,SigProfilerAssignment,0.017077798861480076
+10,high_minus_low_Ts,CO1,SBS1,Ts_and_Tv,SigProfilerAssignment,0.01718213058419244
+76,high_minus_low_Ts,Cytb,SBS5,Ts_only,SigProfilerAssignment,0.07645875251509054
+40,high_minus_low_Ts,CO3,SBS5,Ts_and_Tv,SigProfilerAssignment,0.05128205128205128
+224,high_minus_low_Ts,CO1,SBS12,Ts_only,SigProfilerAssignment,0.4250474383301708
+374,high_minus_low_Ts,CO3,SBS12,Ts_only,SigProfilerAssignment,0.5158620689655172
+217,high_minus_low_Ts,CO1,SBS12,Ts_and_Tv,SigProfilerAssignment,0.37285223367697595
+379,high_minus_low_Ts,CO3,SBS12,Ts_and_Tv,SigProfilerAssignment,0.4858974358974359
+169,high_minus_low_Ts,CO3,SBS19,Ts_only,SigProfilerAssignment,0.23310344827586207
+176,high_minus_low_Ts,CO3,SBS19,Ts_and_Tv,SigProfilerAssignment,0.22564102564102564
+140,high_minus_low_Ts,CO1,SBS23,Ts_only,SigProfilerAssignment,0.2656546489563567
+82,high_minus_low_Ts,CO1,SBS23,Ts_and_Tv,SigProfilerAssignment,0.140893470790378
+470,high_minus_low_Ts,Cytb,SBS26,Ts_only,SigProfilerAssignment,0.47283702213279677
+482,high_minus_low_Ts,Cytb,SBS26,Ts_and_Tv,SigProfilerAssignment,0.46124401913875596
+154,high_minus_low_Ts,CO1,SBS30,Ts_only,SigProfilerAssignment,0.2922201138519924
+182,high_minus_low_Ts,CO3,SBS30,Ts_only,SigProfilerAssignment,0.25103448275862067
+448,high_minus_low_Ts,Cytb,SBS30,Ts_only,SigProfilerAssignment,0.4507042253521127
+155,high_minus_low_Ts,CO1,SBS30,Ts_and_Tv,SigProfilerAssignment,0.2663230240549828
+185,high_minus_low_Ts,CO3,SBS30,Ts_and_Tv,SigProfilerAssignment,0.23717948717948717
+400,high_minus_low_Ts,Cytb,SBS30,Ts_and_Tv,SigProfilerAssignment,0.3827751196172249
+118,high_minus_low_Ts,CO1,SBS42,Ts_and_Tv,SigProfilerAssignment,0.2027491408934708
+163,high_minus_low_Ts,Cytb,SBS42,Ts_and_Tv,SigProfilerAssignment,0.15598086124401914
+242,high_minus_low_Ts,CO1,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.41580756013745707
+158,high_minus_low_Ts,CO1,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.27147766323024053
+127,high_minus_low_Ts,CO1,SBS23,Ts_and_Tv,mSigAct (uniform_top6),0.218213058419244
+55,high_minus_low_Ts,CO1,SBS42,Ts_and_Tv,mSigAct (uniform_top6),0.09450171821305842
+201,high_minus_low_Ts,CO1,SBS12,Ts_only,mSigAct (uniform_top6),0.38140417457305503
+194,high_minus_low_Ts,CO1,SBS23,Ts_only,mSigAct (uniform_top6),0.3681214421252372
+132,high_minus_low_Ts,CO1,SBS30,Ts_only,mSigAct (uniform_top6),0.2504743833017078
+406,high_minus_low_Ts,CO3,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.5198463508322664
+176,high_minus_low_Ts,CO3,SBS23,Ts_and_Tv,mSigAct (uniform_top6),0.22535211267605634
+143,high_minus_low_Ts,CO3,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.18309859154929578
+56,high_minus_low_Ts,CO3,SBS42,Ts_and_Tv,mSigAct (uniform_top6),0.07170294494238157
+349,high_minus_low_Ts,CO3,SBS12,Ts_only,mSigAct (uniform_top6),0.48137931034482756
+293,high_minus_low_Ts,CO3,SBS23,Ts_only,mSigAct (uniform_top6),0.40413793103448276
+83,high_minus_low_Ts,CO3,SBS30,Ts_only,mSigAct (uniform_top6),0.11448275862068966
+374,high_minus_low_Ts,Cytb,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.35789473684210527
+358,high_minus_low_Ts,Cytb,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.34258373205741627
+171,high_minus_low_Ts,Cytb,SBS23,Ts_and_Tv,mSigAct (uniform_top6),0.16363636363636364
+142,high_minus_low_Ts,Cytb,SBS26,Ts_and_Tv,mSigAct (uniform_top6),0.13588516746411483
+434,high_minus_low_Ts,Cytb,SBS12,Ts_only,mSigAct (uniform_top6),0.43618090452261304
+311,high_minus_low_Ts,Cytb,SBS30,Ts_only,mSigAct (uniform_top6),0.31256281407035175
+250,high_minus_low_Ts,Cytb,SBS23,Ts_only,mSigAct (uniform_top6),0.25125628140703515
+481,high_Ts,CO1,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.431390134529148
+383,high_Ts,CO1,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.3434977578475336
+251,high_Ts,CO1,SBS23,Ts_and_Tv,mSigAct (uniform_top6),0.22511210762331837
+390,high_Ts,CO1,SBS12,Ts_only,mSigAct (uniform_top6),0.36757775683317623
+338,high_Ts,CO1,SBS30,Ts_only,mSigAct (uniform_top6),0.31856738925541944
+333,high_Ts,CO1,SBS23,Ts_only,mSigAct (uniform_top6),0.31385485391140433
+636,high_Ts,CO3,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.4937888198757764
+496,high_Ts,CO3,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.38509316770186336
+156,high_Ts,CO3,SBS23,Ts_and_Tv,mSigAct (uniform_top6),0.12111801242236025
+536,high_Ts,CO3,SBS12,Ts_only,mSigAct (uniform_top6),0.4343598055105348
+375,high_Ts,CO3,SBS23,Ts_only,mSigAct (uniform_top6),0.3038897893030794
+323,high_Ts,CO3,SBS30,Ts_only,mSigAct (uniform_top6),0.26175040518638576
+639,high_Ts,Cytb,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.46004319654427644
+511,high_Ts,Cytb,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.36789056875449966
+239,high_Ts,Cytb,SBS23,Ts_and_Tv,mSigAct (uniform_top6),0.1720662347012239
+549,high_Ts,Cytb,SBS12,Ts_only,mSigAct (uniform_top6),0.4097014925373134
+438,high_Ts,Cytb,SBS30,Ts_only,mSigAct (uniform_top6),0.32686567164179103
+353,high_Ts,Cytb,SBS23,Ts_only,mSigAct (uniform_top6),0.26343283582089555
+292,low_Ts,CO1,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.48911222780569513
+247,low_Ts,CO1,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.4137353433835846
+58,low_Ts,CO1,SBS42,Ts_and_Tv,mSigAct (uniform_top6),0.09715242881072027
+248,low_Ts,CO1,SBS30,Ts_only,mSigAct (uniform_top6),0.4567219152854512
+210,low_Ts,CO1,SBS12,Ts_only,mSigAct (uniform_top6),0.3867403314917127
+85,low_Ts,CO1,SBS23,Ts_only,mSigAct (uniform_top6),0.15653775322283608
+267,low_Ts,CO3,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.4571917808219178
+249,low_Ts,CO3,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.4263698630136986
+68,low_Ts,CO3,SBS42,Ts_and_Tv,mSigAct (uniform_top6),0.11643835616438356
+293,low_Ts,CO3,SBS30,Ts_only,mSigAct (uniform_top6),0.553875236294896
+236,low_Ts,CO3,SBS12,Ts_only,mSigAct (uniform_top6),0.44612476370510395
+175,low_Ts,Cytb,SBS12,Ts_and_Tv,mSigAct (uniform_top6),0.43859649122807015
+170,low_Ts,Cytb,SBS30,Ts_and_Tv,mSigAct (uniform_top6),0.42606516290726815
+54,low_Ts,Cytb,SBS42,Ts_and_Tv,mSigAct (uniform_top6),0.13533834586466165
+201,low_Ts,Cytb,SBS30,Ts_only,mSigAct (uniform_top6),0.579250720461095
+146,low_Ts,Cytb,SBS12,Ts_only,mSigAct (uniform_top6),0.4207492795389049

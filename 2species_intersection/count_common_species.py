@@ -304,9 +304,10 @@ def main(args: Iterable[str] | None = None) -> None:
     )
 
     try:
-        source_label = str(input_path.relative_to(PROJECT_ROOT))
+        # Forward slashes so the saved tables are identical on every platform.
+        source_label = input_path.relative_to(PROJECT_ROOT).as_posix()
     except ValueError:
-        source_label = str(input_path)
+        source_label = input_path.as_posix()
     scope_label = options.taxonomic_class.strip()
     for table in (gene_summary, intersection_counts, intersection_members):
         table.insert(0, "source_file", source_label)

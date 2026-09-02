@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .utils import TARGET_GENES
+from utils import TARGET_GENES
 
 # Broad mammalian protein-length screens. MIDORI calls ATP6/ATP8 A6/A8.
 PROTEIN_LENGTH_BOUNDS = {

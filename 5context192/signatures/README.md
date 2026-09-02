@@ -4,6 +4,10 @@ Analysis of COSMIC v3.3 signature assignments in 52 matched mammalian species ac
 
 ## Workflow
 
+Run both steps at once with `python run_all.py`, or one at a time as below.
+Everything runs with the interpreter that starts the script, so activating this
+folder's environment first is enough; `Rscript` must be on PATH.
+
 ### 1. Run SigProfilerAssignment
 ```bash
 python 1_run_sigprofiler.py
@@ -50,13 +54,17 @@ This notebook:
 
 ```
 signatures/
+├── run_all.py                    # Cross-platform runner for steps 1 and 2
 ├── 1_run_sigprofiler.py          # SigProfilerAssignment runner
 ├── 2_run_msigact.py              # mSigAct runner
 ├── run_msigact.R                 # R script for mSigAct (called by 2_run_msigact.py)
 ├── signature_analysis.py         # Shared analysis utilities
 ├── SignatureAnalysis.ipynb       # Main analysis notebook
 │
-├── input/                        # Prepared SBS96 matrices
+├── reference/                    # Human triplet counts used to renormalize
+│   └── triplet_counts_GRCh37_upper.json
+│
+├── input/                        # Prepared SBS96 matrices (rebuilt by step 1)
 │   ├── low_Ts_samples.txt
 │   ├── high_Ts_samples.txt
 │   ├── high_minus_low_Ts_samples.txt
@@ -85,8 +93,14 @@ signatures/
 ## Requirements
 
 ### Python
+
+This substage pins its own environment because SigProfilerAssignment constrains
+NumPy and pandas differently from the rest of the repository:
+
 ```bash
-pip install -r requirements.txt
+python -m venv .venv
+source .venv/bin/activate      # Windows: .venv/Scripts/activate
+python -m pip install -r requirements.txt
 ```
 
 ### R (optional, for mSigAct)
@@ -115,4 +129,6 @@ Both assignment tools analyze three genes with two spectrum types:
 - Input data is derived from stage-5 matched 192-component spectra
 - COSMIC v3.3 (GRCh37 context renormalization)
 - Cross-tool concordance measured via cosine similarity and total variation distance
-- Intermediate files in `work/` are not version-controlled
+- `input/` and `work/` are rebuilt by the scripts and are not version-controlled;
+  `reference/`, `results/`, and `figures/` are tracked so a fresh clone can
+  check the reported numbers without re-running the tools

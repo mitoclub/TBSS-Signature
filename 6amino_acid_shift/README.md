@@ -7,6 +7,11 @@ mitochondrial protein-coding genes in Major Arc order:
 
 `COX1 → COX2 → ATP8 → ATP6 → COX3 → ND3 → ND4L → ND4 → ND5 → CytB`.
 
+This gene list and its order are not written here: they come from
+`MAJOR_ARC_HEAVY_STRAND` in [`../mtdna.py`](../mtdna.py), the canonical rCRS
+gene table shared by every stage. Display names and gene colours come from the
+same module.
+
 The ratios are:
 
 - `(Asn + Lys) / Gly`;
@@ -62,7 +67,9 @@ corrected ratio = (numerator + 0.5) / (denominator + 0.5)
 ```
 
 This keeps zero-count observations instead of silently deleting most ATP8
-measurements. No analytical CSV tables are generated.
+measurements. Section 6 of the notebook repeats the tests separately without
+any correction, on the genes that never need it. No analytical CSV tables are
+generated.
 
 ## Statistical comparison
 
@@ -82,6 +89,27 @@ but all 45 comparisons are calculated. Nothing is selected post hoc because it
 looks especially strong. ATP8/ATP6 and ND4L/ND4 overlap in physical coordinates,
 so the ordered test describes a broad positional trend rather than ten equally
 spaced independent exposure steps.
+
+## Separate check on genes that need no pseudocount
+
+Only two genes make the continuity correction necessary here: ATP8 for
+`(Asn+Lys)/Gly` and ND4L for `Pro/(Phe+Leu[TTA/TTG])`. Notebook section 6
+therefore repeats the whole pipeline on raw, uncorrected ratios after dropping,
+for each ratio, the genes whose numerator or denominator is zero in at least one
+species. The exclusion follows the count structure and is decided before the
+tests; all 1,932 species are kept, so the comparison stays paired.
+
+- `(Asn+Lys)/Gly` keeps `COX1 → COX2 → ATP6 → COX3 → ND3 → ND4L → ND4 → ND5 →
+  CytB`;
+- `Pro/(Phe+Leu[TTA/TTG])` keeps `COX1 → COX2 → ATP8 → ATP6 → COX3 → ND3 → ND4 →
+  ND5 → CytB`.
+
+Adjacency is redefined inside each reduced order, and Holm correction runs
+across its 36 forward pairs, so this family differs from the 45-pair family of
+the main analysis. The corrected ten-gene results stay primary; the reduced sets
+answer only whether the correction drives them. Results live in
+`sensitivity_omnibus`, `sensitivity_pairwise`, and `correction_comparison`;
+no figure or CSV is produced.
 
 ## Figures
 
@@ -119,6 +147,25 @@ COX1 for both ratios:
 
 These are sample-level paired results, not phylogenetically corrected inference.
 
+Without the correction, on the pseudocount-free genes only, both ratios still
+differ among genes (`Friedman p < 10^-300`), with `W = 0.903` for
+`(Asn+Lys)/Gly` on nine genes and `W = 0.772` for the proline-based ratio. The
+ordered Page trend becomes stronger for `(Asn+Lys)/Gly` once ATP8 is removed
+(`p < 10^-300`, against `2.13 × 10^-87` with ten corrected genes) and stays
+unsupported for the proline ratio (`p = 1`). The endpoint is unchanged:
+
+| Ratio | Median CytB/COX1, corrected | Median CytB/COX1, uncorrected |
+|---|---:|---:|
+| `(Asn+Lys)/Gly` | 1.863× | 1.880× |
+| `Pro/(Phe+Leu[TTA/TTG])` | 1.249× | 1.249× |
+
+Of the 36 gene pairs shared by both versions of each ratio, all 36 keep their
+direction for `(Asn+Lys)/Gly` (one has a tied uncorrected median) and all 36
+keep the same Holm decision at 0.05. For `Pro/(Phe+Leu[TTA/TTG])` 35 of 36 agree
+on both; the exception is `ND3 / COX1`, a near-null contrast whose median fold
+change moves from 1.022 to 0.989. The 0.5 correction therefore does not create
+the reported gene differences.
+
 ## Minimal outputs
 
 The extraction backend writes only:
@@ -133,14 +180,14 @@ matrices exist as in-memory DataFrames inside `AminoAcidShift.ipynb`.
 
 Refresh extraction and QC after changing the cached archives:
 
-```powershell
-py -3 6amino_acid_shift/run_analysis.py
+```bash
+python 6amino_acid_shift/run_analysis.py
 ```
 
 Run `AminoAcidShift.ipynb` from the repository root or stage directory, then:
 
-```powershell
-py -3 6amino_acid_shift/verify_midori.py
+```bash
+python 6amino_acid_shift/verify_midori.py
 ```
 
 ## Interpretation limit

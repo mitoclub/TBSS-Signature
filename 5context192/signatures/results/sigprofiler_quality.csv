@@ -1,0 +1,19 @@
+Sample,Total Mutations,Cosine Similarity,L1 Norm,L1_Norm_%,L2 Norm,L2_Norm_%,KL Divergence,Correlation,Branch,Gene,SpectrumType
+CO1__Ts_only,542,0.932,233.561,43.092%,40.398,36.491%,0.20369,0.909,low_Ts,CO1,Ts_only
+CO3__Ts_only,529,0.931,211.371,39.957%,40.304,37.06%,0.17946,0.909,low_Ts,CO3,Ts_only
+Cytb__Ts_only,347,0.926,154.615,44.558%,27.336,38.199%,0.18981,0.901,low_Ts,Cytb,Ts_only
+CO1__Ts_and_Tv,597,0.933,245.024,41.043%,40.245,36.102%,0.17831,0.902,low_Ts,CO1,Ts_and_Tv
+CO3__Ts_and_Tv,584,0.927,237.309,40.635%,41.241,37.548%,0.20876,0.895,low_Ts,CO3,Ts_and_Tv
+Cytb__Ts_and_Tv,398,0.922,175.793,44.169%,28.018,38.624%,0.1934,0.885,low_Ts,Cytb,Ts_and_Tv
+CO1__Ts_only,1061,0.966,322.218,30.369%,55.798,26.27%,0.12054,0.953,high_Ts,CO1,Ts_only
+CO3__Ts_only,1233,0.905,609.107,49.4%,113.004,43.083%,0.21094,0.875,high_Ts,CO3,Ts_only
+Cytb__Ts_only,1339,0.929,557.346,41.624%,98.306,37.105%,0.18566,0.902,high_Ts,Cytb,Ts_only
+CO1__Ts_and_Tv,1116,0.966,341.521,30.602%,55.998,26.315%,0.11741,0.952,high_Ts,CO1,Ts_and_Tv
+CO3__Ts_and_Tv,1288,0.905,606.68,47.102%,112.39,42.775%,0.19528,0.871,high_Ts,CO3,Ts_and_Tv
+Cytb__Ts_and_Tv,1390,0.93,547.273,39.372%,97.554,36.784%,0.15066,0.9,high_Ts,Cytb,Ts_and_Tv
+CO1__Ts_only,527,0.922,234.297,44.459%,45.036,39.05%,0.19482,0.9,high_minus_low_Ts,CO1,Ts_only
+CO3__Ts_only,725,0.836,451.798,62.317%,93.956,55.162%,0.33838,0.794,high_minus_low_Ts,CO3,Ts_only
+Cytb__Ts_only,994,0.89,498.218,50.123%,92.725,45.55%,0.24656,0.851,high_minus_low_Ts,Cytb,Ts_only
+CO1__Ts_and_Tv,582,0.931,252.144,43.324%,42.59,36.694%,0.20364,0.906,high_minus_low_Ts,CO1,Ts_and_Tv
+CO3__Ts_and_Tv,780,0.835,473.554,60.712%,94.161,55.058%,0.34134,0.783,high_minus_low_Ts,CO3,Ts_and_Tv
+Cytb__Ts_and_Tv,1045,0.902,469.711,44.948%,88.004,43.157%,0.19903,0.862,high_minus_low_Ts,Cytb,Ts_and_Tv

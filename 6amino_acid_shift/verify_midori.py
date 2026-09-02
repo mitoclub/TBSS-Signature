@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 
-from .utils import TARGET_GENES, sha256
+from utils import TARGET_GENES, sha256
 
 
 PSEUDOCOUNT = 0.5
@@ -32,16 +32,17 @@ OBSOLETE_OUTPUTS = {
 }
 
 
-def _ratios(row: object) -> tuple[float, float]:
+def _counts(row: object) -> tuple[int, int, int, int]:
+    """Numerator and denominator counts of the two ratios, without correction."""
     amino_acids = Counter(str(row.computed_translation).rstrip("*"))
     coding = str(row.coding_cds_sequence)
     codons = [coding[index:index + 3] for index in range(0, len(coding) - 2, 3)]
     leucine_ttr = sum(codon in {"TTA", "TTG"} for codon in codons)
     return (
-        (amino_acids["N"] + amino_acids["K"] + PSEUDOCOUNT)
-        / (amino_acids["G"] + PSEUDOCOUNT),
-        (amino_acids["P"] + PSEUDOCOUNT)
-        / (amino_acids["F"] + leucine_ttr + PSEUDOCOUNT),
+        amino_acids["N"] + amino_acids["K"],
+        amino_acids["G"],
+        amino_acids["P"],
+        amino_acids["F"] + leucine_ttr,
     )
 
 
@@ -52,7 +53,7 @@ def main() -> None:
 
     files = pd.read_csv(derived / "midori_file_manifest.csv", dtype={"sha256": str})
     assert len(files) == 2 * len(TARGET_GENES)
-    assert set(files["Gene"]) == TARGET_GENES
+    assert set(files["Gene"]) == set(TARGET_GENES)
     assert set(files["molecule"]) == {"NUC", "AA"}
     assert files[["Gene", "molecule"]].duplicated().sum() == 0
     for row in files.itertuples(index=False):
@@ -73,7 +74,7 @@ def main() -> None:
     }
     assert required.issubset(sequences.columns)
     assert not sequences.duplicated(["Species", "Gene"]).any()
-    assert set(sequences["Gene"]) == TARGET_GENES
+    assert set(sequences["Gene"]) == set(TARGET_GENES)
     assert sequences.groupby("Species")["Gene"].nunique().eq(len(TARGET_GENES)).all()
     assert sequences.groupby("Species")["TaxID"].nunique().eq(1).all()
     assert sequences["sequence_qc_status"].eq("pass").all()
@@ -81,16 +82,40 @@ def main() -> None:
     assert sequences["same_feature_pair"].eq(True).all()
     assert sequences["transl_table"].eq(2).all()
 
-    ratio_rows = []
+    count_rows = []
     for row in sequences.itertuples(index=False):
-        ratio_rows.append((row.Species, row.Gene, *_ratios(row)))
-    ratios = pd.DataFrame(
-        ratio_rows,
-        columns=["Species", "Gene", "(Asn+Lys)/Gly", "Pro/(Phe+LeuTTR)"],
+        count_rows.append((row.Species, row.Gene, *_counts(row)))
+    counts = pd.DataFrame(
+        count_rows,
+        columns=[
+            "Species", "Gene", "Asn+Lys", "Gly", "Pro", "Phe+LeuTTR",
+        ],
     )
-    assert np.isfinite(ratios.iloc[:, 2:].to_numpy()).all()
-    for ratio_name in ratios.columns[2:]:
-        wide = ratios.pivot(index="Species", columns="Gene", values=ratio_name)
+    ratio_components = {
+        "(Asn+Lys)/Gly": ("Asn+Lys", "Gly"),
+        "Pro/(Phe+LeuTTR)": ("Pro", "Phe+LeuTTR"),
+    }
+    for ratio_name, (numerator, denominator) in ratio_components.items():
+        counts[ratio_name] = (
+            (counts[numerator] + PSEUDOCOUNT) / (counts[denominator] + PSEUDOCOUNT)
+        )
+        wide = counts.pivot(index="Species", columns="Gene", values=ratio_name)
+        assert np.isfinite(wide.to_numpy()).all()
+        assert np.median(wide["Cytb"] / wide["CO1"]) > 1
+
+    # Genes that never need the continuity correction, checked separately.
+    pseudocount_free = {}
+    for ratio_name, (numerator, denominator) in ratio_components.items():
+        positive = counts.groupby("Gene")[[numerator, denominator]].min().gt(0).all(axis=1)
+        pseudocount_free[ratio_name] = set(positive.index[positive])
+    assert pseudocount_free["(Asn+Lys)/Gly"] == set(TARGET_GENES) - {"A8"}
+    assert pseudocount_free["Pro/(Phe+LeuTTR)"] == set(TARGET_GENES) - {"ND4L"}
+    for ratio_name, (numerator, denominator) in ratio_components.items():
+        retained = counts.loc[counts["Gene"].isin(pseudocount_free[ratio_name])].copy()
+        retained[ratio_name] = retained[numerator] / retained[denominator]
+        wide = retained.pivot(index="Species", columns="Gene", values=ratio_name)
+        assert np.isfinite(wide.to_numpy()).all()
+        assert (wide.to_numpy() > 0).all()
         assert np.median(wide["Cytb"] / wide["CO1"]) > 1
 
     notebook_path = stage / "AminoAcidShift.ipynb"
@@ -119,6 +144,9 @@ def main() -> None:
     assert "paired wilcoxon, one-sided" in code.casefold()
     assert "+ 'p-value ' + format_p_value(endpoint_p)" in code
     assert "$H_1$" not in code
+    assert "PSEUDOCOUNT_FREE_GENES" in code
+    assert "p-value Holm (within subset)" in code
+    assert "correction_comparison" in code
     assert "bootstrap" not in code.casefold()
 
     for stem in ("amino_acid_ratios_by_gene", "paired_ratio_fold_changes"):

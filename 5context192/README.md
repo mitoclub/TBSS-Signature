@@ -18,6 +18,9 @@ therefore within the same species cohort.
   normalized 192-component spectra.
 - `context192_analysis.py`: reusable parsing, heavy-strand orientation,
   validation, context-share, bootstrap-summary, and positional-slope helpers.
+- `../mtdna.py`: canonical gene order, rCRS coordinates, and the DssH proxy.
+  This stage no longer repeats the coordinates it shares with stage 4, so the
+  two cannot drift apart.
 
 Run `Context192MatchedGenes.ipynb` from either the repository root or this
 folder. The notebook creates `data/` and `figures/` automatically.

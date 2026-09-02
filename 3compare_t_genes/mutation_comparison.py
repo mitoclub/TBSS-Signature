@@ -16,6 +16,8 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from itertools import combinations
 from math import ceil
+from pathlib import Path
+import sys
 
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
@@ -26,6 +28,12 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from scipy.stats import wilcoxon
+
+_REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPOSITORY_ROOT))
+
+from mtdna import DISPLAY_NAMES, canonical_order
 
 
 SBS12_ORDER = (
@@ -43,13 +51,9 @@ SBS12_ORDER = (
     "T>G",
 )
 
-DEFAULT_GENE_LABELS = {
-    "CO1": "COX1",
-    "CO3": "COX3",
-    "Cytb": "CytB",
-    "ND2": "ND2",
-    "ND6": "ND6",
-}
+# Display names come from the canonical mitochondrial table so that one gene
+# is never labelled differently in two stages.
+DEFAULT_GENE_LABELS = dict(DISPLAY_NAMES)
 
 DEFAULT_GENE_COLORS = {
     "CO1": "#0072B2",
@@ -1740,12 +1744,18 @@ def _plain_log_tick(value: float, _position: int) -> str:
 
 
 def _normalise_genes(genes: Sequence[str]) -> tuple[str, ...]:
+    """Validate a gene selection and force it into canonical mtDNA order.
+
+    Callers may list genes in any order; every figure, table, and ordered test
+    then uses the fixed rCRS order from :mod:`mtdna`.
+    """
+
     ordered_genes = tuple(genes)
     if not 2 <= len(ordered_genes) <= 5:
         raise ValueError("genes must contain between 2 and 5 entries")
     if len(set(ordered_genes)) != len(ordered_genes):
         raise ValueError("genes must contain unique entries")
-    return ordered_genes
+    return canonical_order(ordered_genes)
 
 
 def _spectrum_array(

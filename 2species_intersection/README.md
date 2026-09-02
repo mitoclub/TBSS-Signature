@@ -65,6 +65,12 @@ All tables record `Mammalia` as the selected taxonomic scope.
 
 The `figures/` folder contains `pairwise_common_species_counts.png`.
 
+## Verification
+
+`python verify_cohorts.py`, in the repository root, recomputes every saved
+intersection from the source table and also checks that the matched cohorts of
+stages 3-5 are exactly those intersections.
+
 ## Caveats
 
 - Intersections are inclusive: a species present in four genes also contributes

@@ -21,11 +21,19 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 import re
+from pathlib import Path
+import sys
 
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 import numpy as np
 import pandas as pd
+
+_REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPOSITORY_ROOT))
+
+from mtdna import canonical_order
 
 
 BASE_ORDER = ("A", "C", "G", "T")
@@ -1227,12 +1235,14 @@ def summarize_context_tsss_slopes(
 
 
 def _normalise_genes(genes: Sequence[str]) -> tuple[str, ...]:
+    """Validate a gene selection and force it into canonical mtDNA order."""
+
     ordered = tuple(genes)
     if len(ordered) < 2:
         raise ValueError("genes must contain at least two entries")
     if len(set(ordered)) != len(ordered):
         raise ValueError("genes must contain unique entries")
-    return ordered
+    return canonical_order(ordered)
 
 
 def _normalise_context_order(context_order: Sequence[str]) -> tuple[str, ...]:

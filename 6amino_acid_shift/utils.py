@@ -4,12 +4,16 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+import sys
 
+_REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPOSITORY_ROOT))
 
-TARGET_GENES = (
-    "CO1", "CO2", "A8", "A6", "CO3",
-    "ND3", "ND4L", "ND4", "ND5", "Cytb",
-)
+from mtdna import MAJOR_ARC_HEAVY_STRAND
+
+# COX1 -> CytB in canonical rCRS order, defined once in ../mtdna.py.
+TARGET_GENES = MAJOR_ARC_HEAVY_STRAND
 
 
 def sha256(path: Path) -> str:

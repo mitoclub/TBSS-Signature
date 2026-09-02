@@ -1,0 +1,25 @@
+# Store every text file with LF in the repository so Windows, Linux, and macOS
+# checkouts produce identical diffs.  Apply it once with:
+#     git add --renormalize .
+* text=auto eol=lf
+
+*.py    text eol=lf
+*.R     text eol=lf
+*.md    text eol=lf
+*.csv   text eol=lf
+*.txt   text eol=lf
+*.ipynb text eol=lf
+*.sh    text eol=lf
+*.ps1   text eol=crlf
+
+# Binary and compressed analysis products.
+*.png   binary
+*.pdf   binary
+*.gz    binary
+*.zip   binary
+*.rds   binary
+*.rdb   binary
+*.rdx   binary
+*.dll   binary
+*.so    binary
+*.pyc   binary
