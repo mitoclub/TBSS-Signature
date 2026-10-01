@@ -1,0 +1,13 @@
+Mut,Gene1,Gene2,n_species,n_nonzero_pairs,statistic,p_value,p_value_underflow,median_paired_difference,difference_definition,alternative,alternative_hypothesis,scipy_alternative_on_gene1_minus_gene2,test,p_value_holm,p_value_holm_underflow
+A>C,CO1,Cytb,104,37,153.0,0.0027477999171499337,False,0.0,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),0.0027477999171499337,False
+A>G,CO1,Cytb,104,104,14.0,1.2800779939820638e-18,False,0.16930065429054864,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),1.2800779939820638e-18,False
+A>T,CO1,Cytb,104,59,353.0,5.9314058690081164e-05,False,0.0,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),5.9314058690081164e-05,False
+C>A,CO1,Cytb,104,27,85.0,0.012468499505409927,False,0.0,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),0.012468499505409927,False
+C>G,CO1,Cytb,104,29,99.0,0.010396668482565371,False,0.0,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),0.010396668482565371,False
+C>T,CO1,Cytb,104,104,128.0,3.2340804421887595e-17,False,0.37704988760563174,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),3.2340804421887595e-17,False
+G>A,CO1,Cytb,104,104,694.0,4.0467452134584605e-11,False,0.04449295317565308,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),4.0467452134584605e-11,False
+G>C,CO1,Cytb,104,40,152.0,0.0005246308602663868,False,0.0,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),0.0005246308602663868,False
+G>T,CO1,Cytb,104,72,577.0,3.5369228884959854e-05,False,0.0009783115320029217,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),3.5369228884959854e-05,False
+T>A,CO1,Cytb,104,82,598.0,3.371368367215275e-07,False,0.008811998184856293,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),3.371368367215275e-07,False
+T>C,CO1,Cytb,104,104,815.0,5.299262090593052e-10,False,0.02438026962519416,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),5.299262090593052e-10,False
+T>G,CO1,Cytb,104,62,527.0,0.0016244675822894206,False,0.0,Gene2 - Gene1,two-sided,Cytb != CO1,two-sided,Paired Wilcoxon signed-rank (two-sided),0.0016244675822894206,False

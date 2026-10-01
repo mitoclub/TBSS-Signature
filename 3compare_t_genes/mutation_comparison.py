@@ -497,6 +497,252 @@ def plot_matched_spectra(
     return SpectrumPlotResult(fig, ax, summary, info.genes, info.n_species)
 
 
+def plot_within_species_differences(
+    data: pd.DataFrame,
+    *,
+    genes: Sequence[str],
+    mutation_order: Sequence[str] = SBS12_ORDER,
+    gene_labels: Mapping[str, str] | None = None,
+    confidence: float = 0.95,
+    n_boot: int = 2_000,
+    random_state: int | np.random.Generator = 0,
+    pairwise_alternative: str = "two-sided",
+    zoom_mutations: Sequence[str] | None = None,
+    y_label: str = "Paired difference",
+    box_color: str = "#7FBFC4",
+    species_col: str = "Species",
+    gene_col: str = "Gene",
+    mutation_col: str = "Mut",
+    value_col: str = "MutSpec",
+    require_sum_to_one: bool = True,
+) -> SpectrumPlotResult:
+    """Show the within-species difference of all 12 components between two genes.
+
+    Every species contributes one difference ``Gene2 - Gene1`` per substitution,
+    so the comparison is paired and no cross-species averaging happens before
+    the subtraction.
+
+    ``value_col`` selects the quantity that is differenced.  With the default
+    normalized ``MutSpec`` the twelve components of each species/gene profile
+    sum to one, so the differences are compositional: an increase in one
+    component forces a decrease elsewhere.  Passing an opportunity-adjusted
+    burden such as ``Observed / Expected`` together with
+    ``require_sum_to_one=False`` removes that constraint.  Callers must then
+    supply an honest ``y_label``, because that quantity is a reconstructed
+    opportunity-adjusted burden and not an absolute mutation rate.
+
+    ``zoom_mutations`` adds a second panel that draws only the named
+    substitutions on their own scale and marks the remaining ones as off scale.
+    It is useful when a few components dominate the range and would otherwise
+    flatten the rest.  Nothing is recalculated for that panel; it shows the same
+    paired differences.
+    """
+
+    ordered_genes = _normalise_genes(genes)
+    if len(ordered_genes) != 2:
+        raise ValueError("Within-species differences are defined for exactly two genes")
+    info = validate_matched_spectra(
+        data,
+        genes=ordered_genes,
+        mutation_order=mutation_order,
+        species_col=species_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+        value_col=value_col,
+        require_sum_to_one=require_sum_to_one,
+    )
+    if not 0 < confidence < 1:
+        raise ValueError("confidence must be between zero and one")
+    if n_boot < 1:
+        raise ValueError("n_boot must be at least one")
+
+    values = _spectrum_array(
+        data,
+        info,
+        species_col=species_col,
+        gene_col=gene_col,
+        mutation_col=mutation_col,
+        value_col=value_col,
+    )
+    differences = values[:, 1, :] - values[:, 0, :]
+    if not np.isfinite(differences).all():
+        raise ValueError("Paired differences must be finite")
+
+    rng = _as_rng(random_state)
+    alpha = (1 - confidence) / 2
+    bootstrap = np.empty((n_boot, differences.shape[1]), dtype=float)
+    for start in range(0, n_boot, 500):
+        stop = min(start + 500, n_boot)
+        draws = rng.integers(0, info.n_species, size=(stop - start, info.n_species))
+        bootstrap[start:stop] = differences[draws].mean(axis=1)
+    lows, highs = np.quantile(bootstrap, [alpha, 1 - alpha], axis=0)
+
+    labels = {**DEFAULT_GENE_LABELS, **(gene_labels or {})}
+    contrast = (
+        f"{labels.get(ordered_genes[1], ordered_genes[1])} - "
+        f"{labels.get(ordered_genes[0], ordered_genes[0])}"
+    )
+    summary = pd.DataFrame(
+        {
+            mutation_col: list(info.mutations),
+            "contrast": contrast,
+            "value_col": value_col,
+            "n_species": info.n_species,
+            "mean_difference": differences.mean(axis=0),
+            "ci_low": lows,
+            "ci_high": highs,
+            "median_difference": np.median(differences, axis=0),
+            "fraction_species_positive": (differences > 0).mean(axis=0),
+            "confidence": confidence,
+        }
+    )
+
+    tests = []
+    for index, mutation in enumerate(info.mutations):
+        tests.append(
+            _paired_wilcoxon_tests(
+                values[:, :, index],
+                ordered_genes,
+                comparison_label=mutation,
+                comparison_col=mutation_col,
+                alternative=pairwise_alternative,
+            )
+        )
+    pairwise_tests = pd.concat(tests, ignore_index=True)
+
+    panels = 2 if zoom_mutations else 1
+    fig, axes = plt.subplots(
+        panels,
+        1,
+        figsize=(13.5, 4.3 * panels),
+        sharex=True,
+        squeeze=False,
+    )
+    axes = axes[:, 0]
+    positions = np.arange(len(info.mutations), dtype=float)
+    jitter = rng.uniform(-0.17, 0.17, size=differences.shape)
+
+    if zoom_mutations is not None:
+        unknown = set(zoom_mutations).difference(info.mutations)
+        if unknown:
+            raise ValueError(f"zoom_mutations are absent from the data: {sorted(unknown)}")
+        if not zoom_mutations:
+            raise ValueError("zoom_mutations must name at least one substitution")
+
+    for panel_index, ax in enumerate(axes):
+        drawn = (
+            list(range(len(info.mutations)))
+            if panel_index == 0
+            else [
+                index for index, mutation in enumerate(info.mutations)
+                if mutation in set(zoom_mutations)
+            ]
+        )
+        ax.axhline(0, color="#20262E", linestyle="--", linewidth=1.0, zorder=1)
+        for index in drawn:
+            ax.scatter(
+                positions[index] + jitter[:, index],
+                differences[:, index],
+                s=6,
+                color=_PAIRED_LINE,
+                alpha=0.30,
+                linewidths=0,
+                zorder=2,
+            )
+        boxplot = ax.boxplot(
+            [differences[:, index] for index in drawn],
+            positions=positions[drawn],
+            widths=0.46,
+            whis=1.5,
+            patch_artist=True,
+            showfliers=False,
+            tick_labels=[info.mutations[index] for index in drawn],
+            zorder=3,
+        )
+        for patch in boxplot["boxes"]:
+            patch.set_facecolor(to_rgba(box_color, 0.55))
+            patch.set_edgecolor("#31363C")
+            patch.set_linewidth(0.9)
+        for element in ("whiskers", "caps", "medians"):
+            for artist in boxplot[element]:
+                artist.set_color("#31363C")
+                artist.set_linewidth(0.9)
+        ax.errorbar(
+            positions[drawn],
+            summary["mean_difference"].to_numpy()[drawn],
+            yerr=[
+                (summary["mean_difference"] - summary["ci_low"]).to_numpy()[drawn],
+                (summary["ci_high"] - summary["mean_difference"]).to_numpy()[drawn],
+            ],
+            fmt="D",
+            markersize=4.2,
+            color="#B3122B",
+            ecolor="#B3122B",
+            elinewidth=1.2,
+            capsize=2.5,
+            zorder=4,
+            label=f"Mean paired difference ({int(confidence * 100)}% bootstrap CI)",
+        )
+        _style_paired_axis(ax)
+        ax.set_ylabel(y_label)
+        if panel_index == 0:
+            ax.set_title(
+                f"Within-species spectrum differences (N = {info.n_species})",
+                loc="center",
+                fontsize=11.5,
+                pad=10,
+            )
+            ax.legend(loc="upper right", frameon=False, fontsize=8.5)
+        else:
+            limit = 0.0
+            for index in drawn:
+                column = differences[:, index]
+                first, third = np.quantile(column, [0.25, 0.75])
+                span = third - first
+                inside = column[
+                    (column >= first - 1.5 * span) & (column <= third + 1.5 * span)
+                ]
+                limit = max(limit, float(np.abs(inside).max(initial=0.0)))
+            if limit <= 0:
+                raise ValueError("zoom_mutations have no spread to set a y-limit")
+            ax.set_ylim(-1.25 * limit, 1.25 * limit)
+            omitted = [
+                index for index in range(len(info.mutations)) if index not in set(drawn)
+            ]
+            for index in omitted:
+                ax.text(
+                    positions[index],
+                    0,
+                    "off scale",
+                    rotation=90,
+                    ha="center",
+                    va="center",
+                    fontsize=7.5,
+                    color="#98A0A8",
+                )
+            ax.set_xticks(positions, list(info.mutations))
+            ax.set_title(
+                "Same differences, scaled to the smaller components; "
+                + ", ".join(info.mutations[index] for index in omitted)
+                + " omitted here",
+                loc="center",
+                fontsize=10,
+                pad=8,
+            )
+    axes[-1].set_xlabel("Substitution on the heavy-strand orientation")
+    axes[-1].xaxis.label.set_color(_PLOT_TEXT)
+    axes[-1].xaxis.label.set_size(9)
+    fig.tight_layout(pad=0.8)
+    return SpectrumPlotResult(
+        fig,
+        axes if panels > 1 else axes[0],
+        summary,
+        info.genes,
+        info.n_species,
+        pairwise_tests,
+    )
+
+
 def plot_mutation_comparison(
     data: pd.DataFrame,
     mutation: str,
